@@ -27,9 +27,33 @@ MpProxyTest >> setUp [
 ]
 
 { #category : 'running' }
-MpProxyTest >> testMessageForwarding [
+MpProxyTest >> testExceptionResponseMessage [
+
+	targetClass compile: 'divide: x by: y
+	^x/y'.
+	self should: [proxy divide: 9 by: 0] raise: ZeroDivide 
+]
+
+{ #category : 'running' }
+MpProxyTest >> testMessagesUnderstoodByProxy [
+	proxy reference: nil dispatcher: nil.
+	self assert: proxy == proxy equals: true.
+	self assert: proxy yourself identicalTo: proxy.
+	self deny: proxy isNil.
+	
+]
+
+{ #category : 'running' }
+MpProxyTest >> testNormalResponseMessage [
 
 	targetClass compile: 'someInt
 	^42'.
-	self assert: proxy someInt equals: 42
+	self assert: proxy someInt equals: 42.
+	self assert: proxy class identicalTo: targetClass 
+]
+
+{ #category : 'running' }
+MpProxyTest >> testUnknownMessageDNU [
+
+	self should: [proxy foo] raise: MessageNotUnderstood 
 ]

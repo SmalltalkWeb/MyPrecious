@@ -5,9 +5,9 @@ Class {
 		'proxy',
 		'transporter'
 	],
-	#category : 'MyPreciousTests-Kernel',
+	#category : 'MyPreciousTests-Common-OLD',
 	#package : 'MyPreciousTests',
-	#tag : 'Kernel'
+	#tag : 'Common-OLD'
 }
 
 { #category : 'tests' }

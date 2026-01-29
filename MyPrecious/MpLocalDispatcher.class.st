@@ -20,9 +20,11 @@ MpLocalDispatcher >> at: reference put: targetObject [
 ]
 
 { #category : 'dispatching' }
-MpLocalDispatcher >> dispatch: aMessage targetReference: reference [
+MpLocalDispatcher >> dispatch: aMessage targetReference: aReference [
 
-	^self
+	| target |
+	target := self at: aReference.
+	^aMessage sendTo: target
 ]
 
 { #category : 'initialization' }
