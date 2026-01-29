@@ -4,9 +4,9 @@ Class {
 	#instVars : [
 		'messageAnswersDict'
 	],
-	#category : 'MyPreciousTests-Common',
+	#category : 'MyPreciousTests-Common-OLD',
 	#package : 'MyPreciousTests',
-	#tag : 'Common'
+	#tag : 'Common-OLD'
 }
 
 { #category : 'initialization' }

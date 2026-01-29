@@ -1,7 +1,7 @@
 Class {
 	#name : 'MpConnectionFailed',
 	#superclass : 'Error',
-	#category : 'MyPrecious-Connected',
+	#category : 'MyPrecious-Connected-OLD',
 	#package : 'MyPrecious',
-	#tag : 'Connected'
+	#tag : 'Connected-OLD'
 }

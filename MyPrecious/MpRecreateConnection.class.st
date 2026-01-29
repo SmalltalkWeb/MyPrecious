@@ -6,9 +6,9 @@ Upon the next message send, the transporter will create a new connection, which 
 Class {
 	#name : 'MpRecreateConnection',
 	#superclass : 'MpRepeatedAttempts',
-	#category : 'MyPrecious-Connected',
+	#category : 'MyPrecious-Connected-OLD',
 	#package : 'MyPrecious',
-	#tag : 'Connected'
+	#tag : 'Connected-OLD'
 }
 
 { #category : 'sending' }

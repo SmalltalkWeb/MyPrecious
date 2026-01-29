@@ -8,9 +8,9 @@ Class {
 		'middlewareB',
 		'middlewareC'
 	],
-	#category : 'MyPreciousTests-Common',
+	#category : 'MyPreciousTests-Common-OLD',
 	#package : 'MyPreciousTests',
-	#tag : 'Common'
+	#tag : 'Common-OLD'
 }
 
 { #category : 'testing' }
@@ -62,7 +62,7 @@ MpMiddlewareTest >> is: anObject instanceOf: aClass [
 
 { #category : 'tests' }
 MpMiddlewareTest >> isProxy: anObject [
-	^self is: anObject instanceOf: MpProxy
+	^self is: anObject instanceOf: MpProxyOLD
 ]
 
 { #category : 'tests' }

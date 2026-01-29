@@ -1,9 +1,9 @@
 Class {
 	#name : 'MpUnconnectedTransportMiddlewareForTest',
 	#superclass : 'MpMiddlewareForTest',
-	#category : 'MyPreciousTests-Unconnected',
+	#category : 'MyPreciousTests-Unconnected-OLD',
 	#package : 'MyPreciousTests',
-	#tag : 'Unconnected'
+	#tag : 'Unconnected-OLD'
 }
 
 { #category : 'initialization' }

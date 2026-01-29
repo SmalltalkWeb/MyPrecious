@@ -4,9 +4,9 @@ Class {
 	#instVars : [
 		'connectionQueue'
 	],
-	#category : 'MyPreciousTests-Connected',
+	#category : 'MyPreciousTests-Connected-OLD',
 	#package : 'MyPreciousTests',
-	#tag : 'Connected'
+	#tag : 'Connected-OLD'
 }
 
 { #category : 'receiving' }

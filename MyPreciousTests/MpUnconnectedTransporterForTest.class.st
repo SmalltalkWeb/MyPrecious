@@ -6,9 +6,9 @@ Class {
 	#instVars : [
 		'receiveQueue'
 	],
-	#category : 'MyPreciousTests-Unconnected',
+	#category : 'MyPreciousTests-Unconnected-OLD',
 	#package : 'MyPreciousTests',
-	#tag : 'Unconnected'
+	#tag : 'Unconnected-OLD'
 }
 
 { #category : 'initialization' }

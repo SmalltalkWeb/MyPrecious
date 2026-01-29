@@ -1,9 +1,9 @@
 Class {
 	#name : 'MpRemoteMessageResultTimeout',
 	#superclass : 'MpRemoteMessagingError',
-	#category : 'MyPrecious-Kernel',
+	#category : 'MyPrecious-Kernel-OLD',
 	#package : 'MyPrecious',
-	#tag : 'Kernel'
+	#tag : 'Kernel-OLD'
 }
 
 { #category : 'accessing' }

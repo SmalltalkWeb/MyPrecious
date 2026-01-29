@@ -11,9 +11,9 @@ Class {
 		'maxNumberOfMessageProcessingWorkers',
 		'incomingMessagesRunner'
 	],
-	#category : 'MyPrecious-Kernel',
+	#category : 'MyPrecious-Kernel-OLD',
 	#package : 'MyPrecious',
-	#tag : 'Kernel'
+	#tag : 'Kernel-OLD'
 }
 
 { #category : 'accessing' }
@@ -149,7 +149,7 @@ MpMiddleware >> processingPriority [
 
 { #category : 'initialization' }
 MpMiddleware >> proxyClass [
-	^MpProxy
+	^MpProxyOLD
 ]
 
 { #category : 'activity' }

@@ -1,9 +1,9 @@
 Class {
 	#name : 'MpMetaMessage',
 	#superclass : 'Object',
-	#category : 'MyPrecious-Connected',
+	#category : 'MyPrecious-Connected-OLD',
 	#package : 'MyPrecious',
-	#tag : 'Connected'
+	#tag : 'Connected-OLD'
 }
 
 { #category : 'communicating' }

@@ -4,9 +4,9 @@ Class {
 	#instVars : [
 		'otherSideAddress'
 	],
-	#category : 'MyPrecious-Connected',
+	#category : 'MyPrecious-Connected-OLD',
 	#package : 'MyPrecious',
-	#tag : 'Connected'
+	#tag : 'Connected-OLD'
 }
 
 { #category : 'communicating' }

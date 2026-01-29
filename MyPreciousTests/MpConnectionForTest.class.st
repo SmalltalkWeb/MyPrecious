@@ -8,9 +8,9 @@ Class {
 		'receiveQueue',
 		'sendQueue'
 	],
-	#category : 'MyPreciousTests-Connected',
+	#category : 'MyPreciousTests-Connected-OLD',
 	#package : 'MyPreciousTests',
-	#tag : 'Connected'
+	#tag : 'Connected-OLD'
 }
 
 { #category : 'connecting' }

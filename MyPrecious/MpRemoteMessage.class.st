@@ -6,9 +6,9 @@ Class {
 		'arguments',
 		'receiver'
 	],
-	#category : 'MyPrecious-Messages',
+	#category : 'MyPrecious-Messages-OLD',
 	#package : 'MyPrecious',
-	#tag : 'Messages'
+	#tag : 'Messages-OLD'
 }
 
 { #category : 'accessing' }
