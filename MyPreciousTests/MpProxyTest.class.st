@@ -29,8 +29,7 @@ MpProxyTest >> setUp [
 { #category : 'running' }
 MpProxyTest >> testMessageForwarding [
 
-"	targetClass compile: 'someInt
+	targetClass compile: 'someInt
 	^42'.
-"	self fail.
 	self assert: proxy someInt equals: 42
 ]
