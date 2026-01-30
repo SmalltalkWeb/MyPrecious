@@ -3,8 +3,6 @@ Class {
 	#superclass : 'TestCase',
 	#instVars : [
 		'proxy',
-		'classFactory',
-		'targetClass',
 		'target'
 	],
 	#category : 'MyPreciousTests-Kernel',
@@ -17,9 +15,7 @@ MpProxyTest >> setUp [
 
 	| targetReference dispatcher |
 	super setUp.
-	classFactory := ClassFactoryForTestCase new.
-	targetClass := classFactory newClass.
-	target := targetClass new.
+	target := MpMock new.
 	targetReference := MpObjectReference new.
 	dispatcher := MpLocalDispatcher new.
 	dispatcher at: targetReference put: target.
@@ -29,8 +25,7 @@ MpProxyTest >> setUp [
 { #category : 'running' }
 MpProxyTest >> testExceptionResponseMessage [
 
-	targetClass compile: 'divide: x by: y
-	^x/y'.
+	target selector: #divide:by: actionBlock: [ :x : y | x/y ].
 	self should: [proxy divide: 9 by: 0] raise: ZeroDivide 
 ]
 
@@ -46,10 +41,9 @@ MpProxyTest >> testMessagesUnderstoodByProxy [
 { #category : 'running' }
 MpProxyTest >> testNormalResponseMessage [
 
-	targetClass compile: 'someInt
-	^42'.
+	target selector: #someInt actionBlock: [ 42 ].
 	self assert: proxy someInt equals: 42.
-	self assert: proxy class identicalTo: targetClass 
+	self assert: proxy class identicalTo: target class 
 ]
 
 { #category : 'running' }
