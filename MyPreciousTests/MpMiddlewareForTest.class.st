@@ -1,6 +1,6 @@
 Class {
 	#name : 'MpMiddlewareForTest',
-	#superclass : 'MpMiddleware',
+	#superclass : 'MpMiddlewareOLD',
 	#classVars : [
 		'AddressCounter',
 		'Registry'

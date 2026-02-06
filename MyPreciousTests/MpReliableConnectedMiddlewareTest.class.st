@@ -1,6 +1,6 @@
 Class {
 	#name : 'MpReliableConnectedMiddlewareTest',
-	#superclass : 'MpMiddlewareTest',
+	#superclass : 'MpMiddlewareTestOLD',
 	#category : 'MyPreciousTests-Connected-OLD',
 	#package : 'MyPreciousTests',
 	#tag : 'Connected-OLD'

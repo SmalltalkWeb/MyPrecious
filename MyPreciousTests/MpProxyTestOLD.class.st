@@ -5,9 +5,9 @@ Class {
 		'proxy',
 		'transporter'
 	],
-	#category : 'MyPreciousTests-Common-OLD',
+	#category : 'MyPreciousTests-Kernel',
 	#package : 'MyPreciousTests',
-	#tag : 'Common-OLD'
+	#tag : 'Kernel'
 }
 
 { #category : 'tests' }
@@ -21,7 +21,7 @@ MpProxyTestOLD >> setUp [
 	| someReference |
 	super setUp.
 	transporter := MpTransporterMock new.
-	someReference := MpRemoteReference basicNew.
+	someReference := MpRemoteReferenceOLD basicNew.
 	proxy := self proxyClass
 		         transporter: transporter
 		         remoteReference: someReference

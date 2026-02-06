@@ -1,6 +1,6 @@
 Class {
 	#name : 'MpTcpMiddleware',
-	#superclass : 'MpMiddleware',
+	#superclass : 'MpMiddlewareOLD',
 	#traits : 'MpTNetMiddleware',
 	#classTraits : 'MpTNetMiddleware classTrait',
 	#category : 'MyPreciousNet-Tcp',

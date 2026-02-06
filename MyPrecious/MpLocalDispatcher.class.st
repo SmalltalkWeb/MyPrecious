@@ -2,34 +2,35 @@ Class {
 	#name : 'MpLocalDispatcher',
 	#superclass : 'MpDispatcher',
 	#instVars : [
-		'referenceDict'
+		'idToObjectDict'
 	],
 	#category : 'MyPrecious-Kernel',
 	#package : 'MyPrecious',
 	#tag : 'Kernel'
 }
 
-{ #category : 'accessing' }
-MpLocalDispatcher >> at: reference [
-	^referenceDict at: reference 
-]
-
-{ #category : 'accessing' }
-MpLocalDispatcher >> at: reference put: targetObject [
-	referenceDict at: reference put:targetObject 
-]
-
 { #category : 'dispatching' }
-MpLocalDispatcher >> dispatch: aMessage targetReference: aReference [
+MpLocalDispatcher >> dispatch: aMessage targetId: anId [
 
 	| target |
-	target := self at: aReference.
-	^aMessage sendTo: target
+	target := idToObjectDict at: anId.
+	^ aMessage sendTo: target
+]
+
+{ #category : 'exporting' }
+MpLocalDispatcher >> export: anObjectToExport id: anId [
+	idToObjectDict at: anId put: anObjectToExport
+]
+
+{ #category : 'accessing' }
+MpLocalDispatcher >> exportedObjectAt: anId [
+
+	^ idToObjectDict at: anId
 ]
 
 { #category : 'initialization' }
 MpLocalDispatcher >> initialize [
 
 	super initialize.
-	referenceDict := Dictionary new
+	idToObjectDict := Dictionary new
 ]

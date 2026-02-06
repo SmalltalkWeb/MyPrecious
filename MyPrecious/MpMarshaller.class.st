@@ -1,6 +1,6 @@
 Class {
 	#name : 'MpMarshaller',
-	#superclass : 'MpMiddlewarePart',
+	#superclass : 'MpMiddlewarePartOLD',
 	#category : 'MyPrecious-Kernel-OLD',
 	#package : 'MyPrecious',
 	#tag : 'Kernel-OLD'

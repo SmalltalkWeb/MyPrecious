@@ -1,6 +1,6 @@
 Class {
 	#name : 'MpReferenceConverter',
-	#superclass : 'MpMiddlewarePart',
+	#superclass : 'MpMiddlewarePartOLD',
 	#instVars : [
 		'exportedObjectsDict',
 		'proxiesDict',

@@ -1,6 +1,6 @@
 Class {
 	#name : 'MpWebMiddleware',
-	#superclass : 'MpMiddleware',
+	#superclass : 'MpMiddlewareOLD',
 	#traits : 'MpTNetMiddleware',
 	#classTraits : 'MpTNetMiddleware classTrait',
 	#category : 'MyPreciousNet-Web',

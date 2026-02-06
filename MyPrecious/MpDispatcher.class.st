@@ -7,6 +7,6 @@ Class {
 }
 
 { #category : 'dispatching' }
-MpDispatcher >> dispatch: aMessage targetReference: reference [
+MpDispatcher >> dispatch: aMessage targetId: anId [
 	self subclassResponsibility 
 ]

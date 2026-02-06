@@ -6,9 +6,9 @@ Class {
 		'isDebugging',
 		'transporter'
 	],
-	#category : 'MyPrecious-Kernel',
+	#category : 'MyPrecious-Kernel-OLD',
 	#package : 'MyPrecious',
-	#tag : 'Kernel'
+	#tag : 'Kernel-OLD'
 }
 
 { #category : 'instance creation' }

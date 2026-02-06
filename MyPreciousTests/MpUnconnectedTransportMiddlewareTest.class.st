@@ -1,6 +1,6 @@
 Class {
 	#name : 'MpUnconnectedTransportMiddlewareTest',
-	#superclass : 'MpMiddlewareTest',
+	#superclass : 'MpMiddlewareTestOLD',
 	#category : 'MyPreciousTests-Unconnected-OLD',
 	#package : 'MyPreciousTests',
 	#tag : 'Unconnected-OLD'

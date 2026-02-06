@@ -1,6 +1,6 @@
 Class {
 	#name : 'MpTransporter',
-	#superclass : 'MpMiddlewarePart',
+	#superclass : 'MpMiddlewarePartOLD',
 	#instVars : [
 		'promisesDict',
 		'promisesLock',

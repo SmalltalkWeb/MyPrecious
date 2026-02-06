@@ -2,245 +2,46 @@ Class {
 	#name : 'MpMiddleware',
 	#superclass : 'Object',
 	#instVars : [
-		'marshaller',
-		'referenceConverter',
-		'address',
-		'transporter',
-		'receptionTimeoutDuration',
-		'processingPriority',
-		'maxNumberOfMessageProcessingWorkers',
-		'incomingMessagesRunner'
+		'proxyFactory',
+		'dispatcherFactory',
+		'localDispatcher',
+		'address'
 	],
-	#category : 'MyPrecious-Kernel-OLD',
+	#category : 'MyPrecious-Kernel',
 	#package : 'MyPrecious',
-	#tag : 'Kernel-OLD'
+	#tag : 'Kernel'
 }
 
 { #category : 'accessing' }
 MpMiddleware >> address [
-	^address
+
+	^ address
 ]
 
 { #category : 'accessing' }
-MpMiddleware >> address: anAddress [
-	address := anAddress 
+MpMiddleware >> address: anObject [
+
+	address := anObject
 ]
 
-{ #category : 'initialization' }
-MpMiddleware >> addressClass [
+{ #category : 'exporting' }
+MpMiddleware >> export: anObjectToExport id: anId [
+
 	self subclassResponsibility
 ]
 
 { #category : 'initialization' }
-MpMiddleware >> defaultMaxNumberOfMessageProcessingWorkers [
-	^15
-]
-
-{ #category : 'initialization' }
-MpMiddleware >> defaultProcessingPriority [
-	^Processor userSchedulingPriority
-]
-
-{ #category : 'initialization' }
-MpMiddleware >> defaultReceptionPriority [
-	^Processor userBackgroundPriority
-]
-
-{ #category : 'initialization' }
-MpMiddleware >> defaultReceptionTimeoutDuration [
-	^500 milliSeconds 
-]
-
-{ #category : 'exporting' }
-MpMiddleware >> export: anObject [ 
-	^self referenceConverter export: anObject
-]
-
-{ #category : 'exporting' }
-MpMiddleware >> export: anObject id: aString [ 
-	^self referenceConverter export: anObject id: aString 
-]
-
-{ #category : 'accessing' }
-MpMiddleware >> incomingMessagesRunner [
-	^incomingMessagesRunner
-]
-
-{ #category : 'initialization' }
-MpMiddleware >> initAddress: anAddress [
-	^self
-]
-
-{ #category : 'initialization' }
 MpMiddleware >> initialize [
+
 	super initialize.
-	referenceConverter := self referenceConverterClass middleware: self.
-	marshaller := self marshallerClass middleware: self.
-	transporter := self transporterClass middleware: self.
-	self receptionTimeoutDuration: self defaultReceptionTimeoutDuration.
-	self 
-		receptionPriority: self defaultReceptionPriority
-		processingPriority: self defaultProcessingPriority.
-	self address: self newAddress.
-	incomingMessagesRunner := self newIncomingMessagesRunner.
-
-]
-
-{ #category : 'activity' }
-MpMiddleware >> isStarted [
-	^self transporter isStarted
-]
-
-{ #category : 'activity' }
-MpMiddleware >> isStopped [
-	^self transporter isStopped
-]
-
-{ #category : 'accessing' }
-MpMiddleware >> marshaller [
-	^ marshaller
-]
-
-{ #category : 'initialization' }
-MpMiddleware >> marshallerClass [
-	^MpMarshaller
-]
-
-{ #category : 'accessing' }
-MpMiddleware >> maxNumberOfMessageProcessingWorkers: anInteger [
-	self newIncomingMessagesRunner poolMaxSize: anInteger
-]
-
-{ #category : 'initialization' }
-MpMiddleware >> newAddress [
-
-	| newAddress |
-	newAddress := self addressClass new.
-	self initAddress: newAddress.
-	^newAddress
-]
-
-{ #category : 'initialization' }
-MpMiddleware >> newIncomingMessagesRunner [
-	^self workerPoolClass new
-		priority: self processingPriority;
-		poolMaxSize: self defaultMaxNumberOfMessageProcessingWorkers;
-		yourself
+	localDispatcher := MpLocalDispatcher new.
+	dispatcherFactory := MpDispatcherFactory new.
+	proxyFactory := MpProxyFactory new.
+	proxyFactory dispatcherFactory: dispatcherFactory
 ]
 
 { #category : 'exporting' }
-MpMiddleware >> objectAt: remoteReference [
-	^self referenceConverter objectAt: remoteReference
-]
+MpMiddleware >> proxyAt: aReference [
 
-{ #category : 'printing' }
-MpMiddleware >> printOn: aStream [
-	super printOn: aStream.
-	aStream
-		<< ' (';
-		print: self address;
-		<<$)
-]
-
-{ #category : 'activity' }
-MpMiddleware >> processingPriority [
-	^processingPriority
-]
-
-{ #category : 'initialization' }
-MpMiddleware >> proxyClass [
-	^MpProxyOLD
-]
-
-{ #category : 'activity' }
-MpMiddleware >> receptionPriority [
-	^self transporter receptionPriority
-]
-
-{ #category : 'activity' }
-MpMiddleware >> receptionPriority: newReceptionPriority processingPriority: newProcessingPriority [
-	newReceptionPriority < newProcessingPriority ifFalse: [ 
-		self error: 'Processing priority should be greater than reception priority' ].
-	self transporter receptionPriority: newReceptionPriority.
-	processingPriority  := newProcessingPriority
-]
-
-{ #category : 'accessing' }
-MpMiddleware >> receptionTimeoutDuration [
-	^receptionTimeoutDuration
-]
-
-{ #category : 'accessing' }
-MpMiddleware >> receptionTimeoutDuration: anObject [
-	receptionTimeoutDuration := anObject
-]
-
-{ #category : 'accessing' }
-MpMiddleware >> referenceConverter [
-	^ referenceConverter
-]
-
-{ #category : 'initialization' }
-MpMiddleware >> referenceConverterClass [
-	^MpReferenceConverter
-]
-
-{ #category : 'exporting' }
-MpMiddleware >> remoteReferenceClass [
-	^MpRemoteReference
-]
-
-{ #category : 'exporting' }
-MpMiddleware >> remoteReferenceFor: anObject [
-	^self referenceConverter remoteReferenceFor: anObject
-]
-
-{ #category : 'messaging' }
-MpMiddleware >> send: selector arguments: args to: targetRemoteReference [ 
-	^self transporter send: selector arguments: args to: targetRemoteReference
-]
-
-{ #category : 'messaging' }
-MpMiddleware >> send: selector to: remoteReference [ 
-	^self transporter send: selector to: remoteReference.
-]
-
-{ #category : 'messaging' }
-MpMiddleware >> sendAsync: selector arguments: args to: targetRemoteReference [
-	self transporter 
-		sendAsync: selector 
-		arguments: args 
-		to: targetRemoteReference
-]
-
-{ #category : 'messaging' }
-MpMiddleware >> sendAsync: selector to: targetRemoteReference [ 
-	self transporter sendAsync: selector to: targetRemoteReference.
-]
-
-{ #category : 'activity' }
-MpMiddleware >> start [
-	self incomingMessagesRunner start.
-	self transporter start
-]
-
-{ #category : 'activity' }
-MpMiddleware >> stop [
-	self incomingMessagesRunner stop.
-	self transporter stop
-]
-
-{ #category : 'accessing' }
-MpMiddleware >> transporter [
-	^transporter
-]
-
-{ #category : 'initialization' }
-MpMiddleware >> transporterClass [
-	^self subclassResponsibility
-]
-
-{ #category : 'initialization' }
-MpMiddleware >> workerPoolClass [
-	^TKTWorkerPool
+	^proxyFactory proxyAt: aReference
 ]

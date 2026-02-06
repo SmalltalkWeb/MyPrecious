@@ -1,64 +1,43 @@
 Class {
 	#name : 'MpRemoteReference',
 	#superclass : 'Object',
-	#traits : 'TEquality',
-	#classTraits : 'TEquality classTrait',
 	#instVars : [
-		'objectId',
+		'id',
 		'address'
 	],
-	#category : 'MyPrecious-Kernel-OLD',
+	#category : 'MyPrecious-Kernel',
 	#package : 'MyPrecious',
-	#tag : 'Kernel-OLD'
+	#tag : 'Kernel'
 }
 
 { #category : 'instance creation' }
-MpRemoteReference class >> address: address objectId: id [
-
-	^ super new
-		  address: address;
-		  objectId: id;
-		  yourself
-]
-
-{ #category : 'instance creation' }
-MpRemoteReference class >> new [
-	self error: 'Use address:objectId: to create remote reference instances'
+MpRemoteReference class >> id: anId address: anAddress [
+	^self new
+		id: anId; 
+		address: anAddress;
+		yourself
 ]
 
 { #category : 'accessing' }
 MpRemoteReference >> address [
-	^address
+
+	^ address
 ]
 
 { #category : 'accessing' }
-MpRemoteReference >> address: anAddress [
-	^address := anAddress
-]
+MpRemoteReference >> address: anObject [
 
-{ #category : 'marshalling' }
-MpRemoteReference >> marshalWith: marshaller [
-	^marshaller marshalRemoteReference: self
+	address := anObject
 ]
 
 { #category : 'accessing' }
-MpRemoteReference >> objectId [
-	^ objectId
+MpRemoteReference >> id [
+
+	^ id
 ]
 
 { #category : 'accessing' }
-MpRemoteReference >> objectId: anObject [
-	objectId := anObject
-]
+MpRemoteReference >> id: anObject [
 
-{ #category : 'printing' }
-MpRemoteReference >> printOn: aStream [
-	aStream 
-		<< 'ID: '
-		<< self objectId
-]
-
-{ #category : 'marshalling' }
-MpRemoteReference >> unmarshalWith: marshaller [
-	^marshaller unmarshalRemoteReference: self
+	id := anObject
 ]

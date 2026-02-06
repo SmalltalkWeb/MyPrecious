@@ -1,5 +1,5 @@
 Class {
-	#name : 'MpMiddlewarePart',
+	#name : 'MpMiddlewarePartOLD',
 	#superclass : 'Object',
 	#instVars : [
 		'middleware'
@@ -10,23 +10,23 @@ Class {
 }
 
 { #category : 'instance creation' }
-MpMiddlewarePart class >> middleware: aMiddleware [
+MpMiddlewarePartOLD class >> middleware: aMiddleware [
 	^self new
 		middleware: aMiddleware;
 		yourself
 ]
 
 { #category : 'accessing' }
-MpMiddlewarePart >> middleware [
+MpMiddlewarePartOLD >> middleware [
 	^ middleware
 ]
 
 { #category : 'accessing' }
-MpMiddlewarePart >> middleware: anObject [
+MpMiddlewarePartOLD >> middleware: anObject [
 	middleware := anObject
 ]
 
 { #category : 'accessing' }
-MpMiddlewarePart >> newId [
+MpMiddlewarePartOLD >> newId [
 	^UUID new asString
 ]
