@@ -4,9 +4,9 @@ Class {
 	#instVars : [
 		'addressToDispatcherDict'
 	],
-	#category : 'MyPrecious-Kernel',
+	#category : 'MyPrecious-Kernel-OLD2',
 	#package : 'MyPrecious',
-	#tag : 'Kernel'
+	#tag : 'Kernel-OLD2'
 }
 
 { #category : 'building' }

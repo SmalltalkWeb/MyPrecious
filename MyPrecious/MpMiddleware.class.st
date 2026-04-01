@@ -2,46 +2,41 @@ Class {
 	#name : 'MpMiddleware',
 	#superclass : 'Object',
 	#instVars : [
-		'proxyFactory',
-		'dispatcherFactory',
 		'localDispatcher',
-		'address'
+		'remoteDispatcher',
+		'proxyFactory'
 	],
 	#category : 'MyPrecious-Kernel',
 	#package : 'MyPrecious',
 	#tag : 'Kernel'
 }
 
-{ #category : 'accessing' }
-MpMiddleware >> address [
-
-	^ address
-]
-
-{ #category : 'accessing' }
-MpMiddleware >> address: anObject [
-
-	address := anObject
-]
-
 { #category : 'exporting' }
-MpMiddleware >> export: anObjectToExport id: anId [
-
-	self subclassResponsibility
+MpMiddleware >> export: anObject id: anId [ 
+	^self
 ]
 
 { #category : 'initialization' }
-MpMiddleware >> initialize [
-
+MpMiddleware >> initialize [ 
 	super initialize.
 	localDispatcher := MpLocalDispatcher new.
-	dispatcherFactory := MpDispatcherFactory new.
+	remoteDispatcher := MpRemoteDispatcher new.
 	proxyFactory := MpProxyFactory new.
-	proxyFactory dispatcherFactory: dispatcherFactory
+	proxyFactory dispatcher: remoteDispatcher 
+	
 ]
 
-{ #category : 'exporting' }
-MpMiddleware >> proxyAt: aReference [
+{ #category : 'accessing' }
+MpMiddleware >> localDispatcher [
+	^localDispatcher
+]
 
-	^proxyFactory proxyAt: aReference
+{ #category : 'importing' }
+MpMiddleware >> proxyAtId: id address: anMpAddress [ 
+	^proxyFactory proxyAtId: id address: anMpAddress 
+]
+
+{ #category : 'accessing' }
+MpMiddleware >> remoteDispatcher [
+	^remoteDispatcher
 ]

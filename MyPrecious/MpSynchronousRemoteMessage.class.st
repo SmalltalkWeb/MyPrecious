@@ -1,6 +1,6 @@
 Class {
 	#name : 'MpSynchronousRemoteMessage',
-	#superclass : 'MpRemoteMessage',
+	#superclass : 'MpRemoteMessageOLD',
 	#instVars : [
 		'responseId',
 		'senderAddress'

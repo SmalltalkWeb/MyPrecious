@@ -5,3 +5,8 @@ Class {
 	#package : 'MyPrecious',
 	#tag : 'Kernel'
 }
+
+{ #category : 'dispatching' }
+MpRemoteDispatcher >> dispatch: aMessage targetReference: aReference [
+	^self
+]

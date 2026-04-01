@@ -103,7 +103,7 @@ MpMiddlewareOLD >> marshaller [
 
 { #category : 'initialization' }
 MpMiddlewareOLD >> marshallerClass [
-	^MpMarshaller
+	^MpMarshallerOLD
 ]
 
 { #category : 'accessing' }

@@ -3,31 +3,31 @@ Class {
 	#superclass : 'Object',
 	#instVars : [
 		'id',
-		'address'
+		'gateway'
 	],
 	#category : 'MyPrecious-Kernel',
 	#package : 'MyPrecious',
 	#tag : 'Kernel'
 }
 
-{ #category : 'instance creation' }
-MpRemoteReference class >> id: anId address: anAddress [
+{ #category : 'instance ' }
+MpRemoteReference class >> id: id gateway: aMpGateway [
 	^self new
-		id: anId; 
-		address: anAddress;
+		id: id;
+		gateway: aMpGateway;
 		yourself
 ]
 
 { #category : 'accessing' }
-MpRemoteReference >> address [
+MpRemoteReference >> gateway [
 
-	^ address
+	^ gateway
 ]
 
 { #category : 'accessing' }
-MpRemoteReference >> address: anObject [
+MpRemoteReference >> gateway: anObject [
 
-	address := anObject
+	gateway := anObject
 ]
 
 { #category : 'accessing' }

@@ -1,34 +1,34 @@
 Class {
-	#name : 'MpLocalAddress',
-	#superclass : 'MpAddress',
+	#name : 'MpLocalAddressOLD2',
+	#superclass : 'MpAddressOLD2',
 	#instVars : [
 		'dispatcher'
 	],
-	#category : 'MyPrecious-Kernel',
+	#category : 'MyPrecious-Kernel-OLD2',
 	#package : 'MyPrecious',
-	#tag : 'Kernel'
+	#tag : 'Kernel-OLD2'
 }
 
 { #category : 'instance creation' }
-MpLocalAddress class >> dispatcher: aDispatcher [
+MpLocalAddressOLD2 class >> dispatcher: aDispatcher [
 	^self new
 		dispatcher: aDispatcher;		
 		yourself
 ]
 
 { #category : 'converting' }
-MpLocalAddress >> asDispatcher [
+MpLocalAddressOLD2 >> asDispatcher [
 	^self dispatcher
 ]
 
 { #category : 'accessing' }
-MpLocalAddress >> dispatcher [
+MpLocalAddressOLD2 >> dispatcher [
 
 	^ dispatcher
 ]
 
 { #category : 'accessing' }
-MpLocalAddress >> dispatcher: anObject [
+MpLocalAddressOLD2 >> dispatcher: anObject [
 
 	dispatcher := anObject
 ]

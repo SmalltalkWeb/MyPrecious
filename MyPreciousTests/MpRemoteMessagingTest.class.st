@@ -1,5 +1,5 @@
 Class {
-	#name : 'MpMiddlewareTest',
+	#name : 'MpRemoteMessagingTest',
 	#superclass : 'TestCase',
 	#traits : 'MpTProxyTest',
 	#classTraits : 'MpTProxyTest classTrait',
@@ -13,12 +13,12 @@ Class {
 }
 
 { #category : 'testing' }
-MpMiddlewareTest class >> isAbstract [ 
-	^self == MpMiddlewareTest 
+MpRemoteMessagingTest class >> isAbstract [ 
+	^self == MpRemoteMessagingTest 
 ]
 
 { #category : 'running' }
-MpMiddlewareTest >> assertIsProxy: anObject [
+MpRemoteMessagingTest >> assertIsProxy: anObject [
 	"MpProxy overrides #class method to answer the receiver's actual class"
 	
 	| classMethod |
@@ -27,31 +27,30 @@ MpMiddlewareTest >> assertIsProxy: anObject [
 ]
 
 { #category : 'running' }
-MpMiddlewareTest >> initMiddleware [ 
+MpRemoteMessagingTest >> initMiddleware [ 
 	self subclassResponsibility 
 ]
 
 { #category : 'running' }
-MpMiddlewareTest >> setUp [
+MpRemoteMessagingTest >> setUp [
 
-	| targetReference id |
+	| id |
 	super setUp.
 	self initMiddleware.
 	target := MpMock new.
 	id := #someIdentifier.
 	receiverMiddleware export: target id: id.
-	targetReference := MpRemoteReference id: id address: receiverMiddleware address.
-	proxy := senderMiddleware proxyAt: targetReference
+	proxy := senderMiddleware proxyAtId: id address: receiverMiddleware address
 ]
 
 { #category : 'running' }
-MpMiddlewareTest >> testArgObjectsProxified [
+MpRemoteMessagingTest >> testArgObjectsProxified [
 
 	self fail: #todo
 ]
 
 { #category : 'running' }
-MpMiddlewareTest >> testOtherObjectResponseProxified [
+MpRemoteMessagingTest >> testOtherObjectResponseProxified [
 
 	| other otherProxy |
 	other := MpMock new.
@@ -63,7 +62,7 @@ MpMiddlewareTest >> testOtherObjectResponseProxified [
 ]
 
 { #category : 'running' }
-MpMiddlewareTest >> testTargetObjectResponseProxified [
+MpRemoteMessagingTest >> testTargetObjectResponseProxified [
 
 	target selector: #me actionBlock: [target].	
 	self assert: proxy me identicalTo: proxy.

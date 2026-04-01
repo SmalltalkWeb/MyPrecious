@@ -1,6 +1,6 @@
 Class {
 	#name : 'MpAsynchronousRemoteMessage',
-	#superclass : 'MpRemoteMessage',
+	#superclass : 'MpRemoteMessageOLD',
 	#category : 'MyPrecious-Messages-OLD',
 	#package : 'MyPrecious',
 	#tag : 'Messages-OLD'

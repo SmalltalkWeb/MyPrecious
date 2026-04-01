@@ -1,8 +1,8 @@
 Class {
-	#name : 'MpDispatcher',
+	#name : 'MpExporter',
 	#superclass : 'Object',
 	#instVars : [
-		'marshaller'
+		'idToObjectDict'
 	],
 	#category : 'MyPrecious-Kernel',
 	#package : 'MyPrecious',

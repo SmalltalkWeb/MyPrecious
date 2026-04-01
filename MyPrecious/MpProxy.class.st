@@ -3,7 +3,7 @@ Class {
 	#superclass : 'ProtoObject',
 	#instVars : [
 		'dispatcher',
-		'id'
+		'targetReference'
 	],
 	#category : 'MyPrecious-Kernel',
 	#package : 'MyPrecious',
@@ -11,9 +11,9 @@ Class {
 }
 
 { #category : 'instance creation' }
-MpProxy class >> id: anId dispatcher: aDispatcher [ 
+MpProxy class >> reference: aReference dispatcher: aDispatcher [ 
 	^self new
-		id: anId dispatcher: aDispatcher;
+		reference: aReference dispatcher: aDispatcher;
 		yourself
 ]
 
@@ -27,12 +27,12 @@ MpProxy >> class [
 { #category : 'reflective operations' }
 MpProxy >> doesNotUnderstand: aMessage [
 
-	^ dispatcher dispatch: aMessage targetId: id
+	^ dispatcher dispatch: aMessage targetReference: targetReference
 ]
 
 { #category : 'initialization' }
-MpProxy >> id: anId dispatcher: aDispatcher [
-	id := anId.
+MpProxy >> reference: aReference dispatcher: aDispatcher [
+	targetReference := aReference.
 	dispatcher := aDispatcher
 ]
 

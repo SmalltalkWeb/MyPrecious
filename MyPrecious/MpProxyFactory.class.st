@@ -2,8 +2,8 @@ Class {
 	#name : 'MpProxyFactory',
 	#superclass : 'Object',
 	#instVars : [
-		'referenceToProxyDict',
-		'dispatcherFactory'
+		'dispatcher',
+		'addressToGatewayDict'
 	],
 	#category : 'MyPrecious-Kernel',
 	#package : 'MyPrecious',
@@ -11,35 +11,36 @@ Class {
 }
 
 { #category : 'accessing' }
-MpProxyFactory >> dispatcherFactory [
+MpProxyFactory >> dispatcher [
 
-	^ dispatcherFactory
+	^ dispatcher
 ]
 
 { #category : 'accessing' }
-MpProxyFactory >> dispatcherFactory: anObject [
+MpProxyFactory >> dispatcher: anObject [
 
-	dispatcherFactory := anObject
+	dispatcher := anObject
+]
+
+{ #category : 'creating' }
+MpProxyFactory >> gatewayFromAddress: anMpAddress [
+
+	^addressToGatewayDict 
+		at: anMpAddress 
+		ifAbsentPut: [anMpAddress asGateway].
+	
 ]
 
 { #category : 'initialization' }
 MpProxyFactory >> initialize [ 
 	super initialize.
-	referenceToProxyDict := Dictionary new
+	addressToGatewayDict := Dictionary new
 ]
 
-{ #category : 'building' }
-MpProxyFactory >> newProxyFrom: aReference [
-	| dispatcher id |
-	id := aReference id.
-	dispatcher := dispatcherFactory dispatcherAt: aReference address.
-	^MpProxy id: id dispatcher: dispatcher
-]
-
-{ #category : 'building' }
-MpProxyFactory >> proxyAt: aReference [
-
-	^ referenceToProxyDict
-		  at: aReference
-		  ifAbsentPut: [ self newProxyFrom: aReference ]
+{ #category : 'creating' }
+MpProxyFactory >> proxyAtId: id address: anMpAddress [ 
+	| remoteReference gateway |
+	gateway := self gatewayFromAddress: anMpAddress.
+	remoteReference := MpRemoteReference id: id gateway: gateway.
+	^MpProxy reference: remoteReference dispatcher: self dispatcher
 ]

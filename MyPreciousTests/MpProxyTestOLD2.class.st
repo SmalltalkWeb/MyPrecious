@@ -1,5 +1,5 @@
 Class {
-	#name : 'MpProxyTest',
+	#name : 'MpProxyTestOLD2',
 	#superclass : 'TestCase',
 	#traits : 'MpTProxyTest',
 	#classTraits : 'MpTProxyTest classTrait',
@@ -9,12 +9,12 @@ Class {
 }
 
 { #category : 'running' }
-MpProxyTest >> setUp [
+MpProxyTestOLD2 >> setUp [
 
 	| dispatcher id |
 	super setUp.
 	target := MpMock new.
-	dispatcher := MpLocalDispatcher new.
+	dispatcher := MpLocalDispatcherOLD2 new.
 	id := #someIdentifier.
 	dispatcher export: target id: id.
 	proxy := MpProxy id: id dispatcher: dispatcher
