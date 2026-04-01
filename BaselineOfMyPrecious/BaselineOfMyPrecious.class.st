@@ -19,7 +19,6 @@ BaselineOfMyPrecious >> baseline: spec [
 					repository: 'github://bouraqadi/PharoMisc:pharo12/Pharo' ].
 
 		spec 
-			repository: 'github://bouraqadi/MyPrecious:pharo12';
 			package: #MyPrecious with: [
 				spec requires: #('Concurrency')];
 			package: #MyPreciousTests with: [
