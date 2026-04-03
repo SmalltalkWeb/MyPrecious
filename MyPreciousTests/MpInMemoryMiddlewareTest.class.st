@@ -53,6 +53,22 @@ MpInMemoryMiddlewareTest >> testGatewayCreation [
 ]
 
 { #category : 'testing' }
+MpInMemoryMiddlewareTest >> testSameProxyForSameIdEqualAdresses [
+
+	| id proxy1  proxy2 |
+	id := #someId.
+	proxy1 := senderMiddleware
+		          proxyAtId: id
+		          address: receiverMiddleware address.
+	proxy2 := senderMiddleware
+		          proxyAtId: id
+		          address: receiverMiddleware address.
+	self
+		assert: proxy1
+		identicalTo: proxy2
+]
+
+{ #category : 'testing' }
 MpInMemoryMiddlewareTest >> testTwoProxiesDiffrentAdressesHaveDifferentGateway [
 
 	| proxy1 remoteReference1 proxy2 remoteReference2 |

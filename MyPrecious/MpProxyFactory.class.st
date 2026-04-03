@@ -39,8 +39,8 @@ MpProxyFactory >> initialize [
 
 { #category : 'creating' }
 MpProxyFactory >> proxyAtId: id address: anMpAddress [ 
-	| remoteReference gateway |
+	| gateway |
 	gateway := self gatewayFromAddress: anMpAddress.
-	remoteReference := MpRemoteReference id: id gateway: gateway.
-	^MpProxy reference: remoteReference dispatcher: self dispatcher
+	^gateway proxyAt: id disptacher: self dispatcher.
+
 ]

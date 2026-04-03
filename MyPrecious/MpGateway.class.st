@@ -2,7 +2,8 @@ Class {
 	#name : 'MpGateway',
 	#superclass : 'Object',
 	#instVars : [
-		'address'
+		'address',
+		'idToProxyDict'
 	],
 	#category : 'MyPrecious-Kernel',
 	#package : 'MyPrecious',
@@ -26,4 +27,22 @@ MpGateway >> address [
 MpGateway >> address: anObject [
 
 	address := anObject
+]
+
+{ #category : 'initialization' }
+MpGateway >> initialize [ 
+	super initialize.
+	idToProxyDict := Dictionary new
+]
+
+{ #category : 'proxies' }
+MpGateway >> newProxyAt: id disptacher: aDispatcher [
+	| remoteReference |
+	remoteReference := MpRemoteReference id: id gateway: self.
+	^MpProxy reference: remoteReference dispatcher: aDispatcher
+]
+
+{ #category : 'proxies' }
+MpGateway >> proxyAt: id  disptacher: aDispatcher [
+	^idToProxyDict at: id ifAbsentPut: [ self newProxyAt: id disptacher: aDispatcher]
 ]
