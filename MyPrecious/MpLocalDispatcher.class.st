@@ -2,6 +2,8 @@
 Deserializes and unmarshalls messages before delivering them to the receiver.
 Receiver is found based on provided ID.
 Receiver is assumed to be previously exported with the given ID.
+
+Response is marshalled then serialized before returning it.
 "
 Class {
 	#name : 'MpLocalDispatcher',

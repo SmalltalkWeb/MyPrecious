@@ -1,9 +1,9 @@
+"
+Dispatchs messages
+"
 Class {
 	#name : 'MpDispatcher',
 	#superclass : 'Object',
-	#instVars : [
-		'marshaller'
-	],
 	#category : 'MyPrecious-Kernel',
 	#package : 'MyPrecious',
 	#tag : 'Kernel'
