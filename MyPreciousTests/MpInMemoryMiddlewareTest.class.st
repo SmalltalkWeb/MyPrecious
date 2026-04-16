@@ -23,7 +23,7 @@ MpInMemoryMiddlewareTest >> targetReferenceOfProxy: proxy1 [
 	^ (MpProxy slotNamed: #targetReference) read: proxy1
 ]
 
-{ #category : 'testing' }
+{ #category : 'misc testing' }
 MpInMemoryMiddlewareTest >> testExport [
 	"Smoke test"
 	| id  |
@@ -32,7 +32,7 @@ MpInMemoryMiddlewareTest >> testExport [
 
 ]
 
-{ #category : 'testing' }
+{ #category : 'proxy testing' }
 MpInMemoryMiddlewareTest >> testForgeProxy [
 	| id proxy remoteReference dispatcher |
 	id := #someIdentifier.
@@ -45,14 +45,14 @@ MpInMemoryMiddlewareTest >> testForgeProxy [
 
 ]
 
-{ #category : 'testing' }
+{ #category : 'misc testing' }
 MpInMemoryMiddlewareTest >> testGatewayCreation [
 	| senderGateway |
 	senderGateway := senderMiddleware address asGateway.
 	self assert: senderGateway targetDispatcher identicalTo: senderMiddleware localDispatcher 
 ]
 
-{ #category : 'testing' }
+{ #category : 'proxy testing' }
 MpInMemoryMiddlewareTest >> testSameProxyForSameIdEqualAdresses [
 
 	| id proxy1  proxy2 |
@@ -68,7 +68,7 @@ MpInMemoryMiddlewareTest >> testSameProxyForSameIdEqualAdresses [
 		identicalTo: proxy2
 ]
 
-{ #category : 'testing' }
+{ #category : 'proxy testing' }
 MpInMemoryMiddlewareTest >> testTwoProxiesDiffrentAdressesHaveDifferentGateway [
 
 	| proxy1 remoteReference1 proxy2 remoteReference2 |
@@ -86,7 +86,7 @@ MpInMemoryMiddlewareTest >> testTwoProxiesDiffrentAdressesHaveDifferentGateway [
 		equals: remoteReference2 gateway
 ]
 
-{ #category : 'testing' }
+{ #category : 'proxy testing' }
 MpInMemoryMiddlewareTest >> testTwoProxiesSameAdressHaveIdenticalGateway [
 
 	| proxy1 remoteReference1 proxy2 remoteReference2 |
