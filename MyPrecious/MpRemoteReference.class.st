@@ -10,7 +10,7 @@ Class {
 	#tag : 'Kernel'
 }
 
-{ #category : 'instance ' }
+{ #category : 'instance' }
 MpRemoteReference class >> id: id gateway: aMpGateway [
 	^self new
 		id: id;

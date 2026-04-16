@@ -18,7 +18,7 @@ MpInMemoryMiddlewareTest >> setUp [
 ]
 
 { #category : 'helpers' }
-MpInMemoryMiddlewareTest >> targetReferenceOfProxy: proxy1 [
+MpInMemoryMiddlewareTest >> targetReferenceSlotValueInProxy: proxy1 [
 
 	^ (MpProxy slotNamed: #targetReference) read: proxy1
 ]
@@ -39,7 +39,7 @@ MpInMemoryMiddlewareTest >> testForgeProxy [
 	proxy := senderMiddleware proxyAtId: id address: receiverMiddleware address.
 	dispatcher := (MpProxy slotNamed: #dispatcher) read: proxy.
 	self assert: dispatcher identicalTo: senderMiddleware remoteDispatcher.
-	remoteReference := self targetReferenceOfProxy: proxy. 
+	remoteReference := self targetReferenceSlotValueInProxy: proxy. 
 	self assert: remoteReference id equals: id.
 	self assert: remoteReference gateway address equals: receiverMiddleware address.
 
@@ -75,7 +75,7 @@ MpInMemoryMiddlewareTest >> testTwoProxiesDiffrentAdressesHaveDifferentGateway [
 	proxy1 := senderMiddleware
 		          proxyAtId: #o1
 		          address: receiverMiddleware address.
-	remoteReference1 := self targetReferenceOfProxy: proxy1.
+	remoteReference1 := self targetReferenceSlotValueInProxy: proxy1.
 	proxy2 := senderMiddleware
 		          proxyAtId: #o2
 		          address: MpInMemoryAddress new.
@@ -93,7 +93,7 @@ MpInMemoryMiddlewareTest >> testTwoProxiesSameAdressHaveIdenticalGateway [
 	proxy1 := senderMiddleware
 		          proxyAtId: #o1
 		          address: receiverMiddleware address.
-	remoteReference1 := self targetReferenceOfProxy: proxy1.
+	remoteReference1 := self targetReferenceSlotValueInProxy: proxy1.
 	proxy2 := senderMiddleware
 		          proxyAtId: #o2
 		          address: receiverMiddleware address.
