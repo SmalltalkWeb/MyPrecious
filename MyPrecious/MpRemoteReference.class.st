@@ -18,6 +18,11 @@ MpRemoteReference class >> id: id gateway: aMpGateway [
 		yourself
 ]
 
+{ #category : 'message handling' }
+MpRemoteReference >> dispatch: aMessage [
+	^gateway dispatch: aMessage targetId: id 
+]
+
 { #category : 'accessing' }
 MpRemoteReference >> gateway [
 

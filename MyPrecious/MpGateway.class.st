@@ -29,6 +29,11 @@ MpGateway >> address: anObject [
 	address := anObject
 ]
 
+{ #category : 'message handling' }
+MpGateway >> dispatch: aMessage targetId: id [
+	self subclassResponsibility 
+]
+
 { #category : 'initialization' }
 MpGateway >> initialize [ 
 	super initialize.

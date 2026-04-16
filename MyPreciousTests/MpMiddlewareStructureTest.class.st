@@ -1,5 +1,5 @@
 Class {
-	#name : 'MpInMemoryMiddlewareTest',
+	#name : 'MpMiddlewareStructureTest',
 	#superclass : 'TestCase',
 	#instVars : [
 		'receiverMiddleware',
@@ -11,29 +11,20 @@ Class {
 }
 
 { #category : 'running' }
-MpInMemoryMiddlewareTest >> setUp [
+MpMiddlewareStructureTest >> setUp [
 	super setUp.
 	senderMiddleware := MpInMemoryMiddleware new.
 	receiverMiddleware := MpInMemoryMiddleware new.
 ]
 
 { #category : 'helpers' }
-MpInMemoryMiddlewareTest >> targetReferenceSlotValueInProxy: proxy1 [
+MpMiddlewareStructureTest >> targetReferenceSlotValueInProxy: proxy1 [
 
 	^ (MpProxy slotNamed: #targetReference) read: proxy1
 ]
 
-{ #category : 'misc testing' }
-MpInMemoryMiddlewareTest >> testExport [
-	"Smoke test"
-	| id  |
-	id := #someIdentifier.
-	receiverMiddleware export: Object new id: id.
-
-]
-
 { #category : 'proxy testing' }
-MpInMemoryMiddlewareTest >> testForgeProxy [
+MpMiddlewareStructureTest >> testForgeProxy [
 	| id proxy remoteReference dispatcher |
 	id := #someIdentifier.
 	proxy := senderMiddleware proxyAtId: id address: receiverMiddleware address.
@@ -46,14 +37,14 @@ MpInMemoryMiddlewareTest >> testForgeProxy [
 ]
 
 { #category : 'misc testing' }
-MpInMemoryMiddlewareTest >> testGatewayCreation [
+MpMiddlewareStructureTest >> testGatewayCreation [
 	| senderGateway |
 	senderGateway := senderMiddleware address asGateway.
 	self assert: senderGateway targetDispatcher identicalTo: senderMiddleware localDispatcher 
 ]
 
 { #category : 'proxy testing' }
-MpInMemoryMiddlewareTest >> testSameProxyForSameIdEqualAdresses [
+MpMiddlewareStructureTest >> testSameProxyForSameIdEqualAdresses [
 
 	| id proxy1  proxy2 |
 	id := #someId.
@@ -69,7 +60,7 @@ MpInMemoryMiddlewareTest >> testSameProxyForSameIdEqualAdresses [
 ]
 
 { #category : 'proxy testing' }
-MpInMemoryMiddlewareTest >> testTwoProxiesDifferentIdSameAdressHaveIdenticalGateway [
+MpMiddlewareStructureTest >> testTwoProxiesDifferentIdSameAdressHaveIdenticalGateway [
 
 	| proxy1 remoteReference1 proxy2 remoteReference2 |
 	proxy1 := senderMiddleware
@@ -87,7 +78,7 @@ MpInMemoryMiddlewareTest >> testTwoProxiesDifferentIdSameAdressHaveIdenticalGate
 ]
 
 { #category : 'proxy testing' }
-MpInMemoryMiddlewareTest >> testTwoProxiesSameIdDiffrentAdressesHaveDifferentGateway [
+MpMiddlewareStructureTest >> testTwoProxiesSameIdDiffrentAdressesHaveDifferentGateway [
 
 	| proxy1 id remoteReference1 proxy2 remoteReference2 |
 	id := #myObject.

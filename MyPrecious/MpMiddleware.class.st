@@ -13,7 +13,12 @@ Class {
 
 { #category : 'exporting' }
 MpMiddleware >> export: anObject id: anId [ 
-	^self
+	^self exporter export: anObject id: anId
+]
+
+{ #category : 'accessing' }
+MpMiddleware >> exporter [
+	^self localDispatcher exporter
 ]
 
 { #category : 'initialization' }
