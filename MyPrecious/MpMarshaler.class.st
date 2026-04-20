@@ -35,6 +35,11 @@ MpMarshaler >> exporter: anObject [
 	exporter := anObject
 ]
 
+{ #category : 'marshalling low level' }
+MpMarshaler >> idAt: anObject [  
+	^self exporter idAt: anObject  
+]
+
 { #category : 'initialization' }
 MpMarshaler >> initialize [ 
 	super initialize.
@@ -51,9 +56,10 @@ MpMarshaler >> marashal: anObject [
 { #category : 'marshalling top level' }
 MpMarshaler >> marshalObject: anObject [
 
-	InformativeNotification signal: 'marshalObject: TODO'.
-	^ anObject "	anObject isPassByCopy ifTrue: [ ^anObject ].
-	^self remoteReferenceFor: anObject"
+"	anObject isPassByCopy ifTrue: [ ^anObject ]."
+	| id |
+	id := self idAt: anObject.
+	^MpRemoteReference id: id address: self address
 ]
 
 { #category : 'marshalling top level' }
