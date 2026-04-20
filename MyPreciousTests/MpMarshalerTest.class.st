@@ -36,6 +36,15 @@ MpMarshalerTest >> testMarshalManuallyExportedObject [
 ]
 
 { #category : 'running' }
+MpMarshalerTest >> testMarshalPassByCopyObject [
+	| object marshalResult |
+	object := 42.
+	self assert: object isPassByCopy.
+	marshalResult := marshaler marashal: object.
+	self assert: marshalResult identicalTo: object
+]
+
+{ #category : 'running' }
 MpMarshalerTest >> testMarshalPassByReferenceObject [
 	| object remoteReference |
 	object := Object new.
@@ -44,6 +53,14 @@ MpMarshalerTest >> testMarshalPassByReferenceObject [
 	self assert: remoteReference address identicalTo: marshaler address.
 	self deny: remoteReference id isNil.
 	
+]
+
+{ #category : 'running' }
+MpMarshalerTest >> testUnmarshalPassByCopyObject [
+	| object unmarshalResult |
+	object := 42.
+	unmarshalResult := marshaler unmarshal: object.
+	self assert: unmarshalResult identicalTo: object
 ]
 
 { #category : 'running' }

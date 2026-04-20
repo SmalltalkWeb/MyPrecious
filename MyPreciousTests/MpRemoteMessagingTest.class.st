@@ -88,6 +88,16 @@ MpRemoteMessagingTest >> testNormalResponseMessage [
 ]
 
 { #category : 'running' }
+MpRemoteMessagingTest >> testNormalResponseMessagePassByCopy [
+
+	target selector: #unary actionBlock: [ 42 ].
+	self assert: proxy unary equals: 42.
+	target selector: #+ actionBlock: [ :arg | arg + 1 ].
+	self assert: proxy + 0 equals: 1.
+
+]
+
+{ #category : 'running' }
 MpRemoteMessagingTest >> testNormalResponseProxified [
 
 	target selector: #me actionBlock: [target].	

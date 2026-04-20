@@ -57,8 +57,8 @@ MpMarshaler >> marashal: anObject [
 { #category : 'marshalling top level' }
 MpMarshaler >> marshalObject: anObject [
 
-"	anObject isPassByCopy ifTrue: [ ^anObject ]."
 	| id |
+	anObject isPassByCopy ifTrue: [ ^anObject ].
 	id := self idAt: anObject.
 	^MpRemoteReference id: id address: self address
 ]
