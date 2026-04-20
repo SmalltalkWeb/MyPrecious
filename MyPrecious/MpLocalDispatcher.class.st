@@ -13,6 +13,13 @@ Class {
 	#tag : 'Kernel'
 }
 
+{ #category : 'instance creation' }
+MpLocalDispatcher class >> address: aMpAddress [ 
+	^self new
+		address: aMpAddress;
+		yourself
+]
+
 { #category : 'accessing' }
 MpLocalDispatcher >> address [
 	^marshaler address

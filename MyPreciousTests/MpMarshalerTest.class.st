@@ -1,6 +1,8 @@
 Class {
 	#name : 'MpMarshalerTest',
 	#superclass : 'TestCase',
+	#traits : 'MpTProxyTest',
+	#classTraits : 'MpTProxyTest classTrait',
 	#instVars : [
 		'marshaler'
 	],
@@ -41,5 +43,17 @@ MpMarshalerTest >> testMarshalPassByReferenceObject [
 	remoteReference := marshaler marashal: object.
 	self assert: remoteReference address identicalTo: marshaler address.
 	self deny: remoteReference id isNil.
+	
+]
+
+{ #category : 'running' }
+MpMarshalerTest >> testUnmarshalRemoteReference [
+	| remoteReference proxy dispatcher |
+	remoteReference := MpRemoteReference id: #someObject address: MpInMemoryAddress new.
+	proxy := marshaler unmarshal: remoteReference.
+	self assertIsProxy: proxy.
+	self assertProxy: proxy hasId: remoteReference id.
+	dispatcher := self dispatcherSlotValueInProxy: proxy.
+	self assert: dispatcher address equals: remoteReference address.
 	
 ]

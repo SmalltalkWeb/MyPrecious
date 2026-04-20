@@ -29,13 +29,7 @@ MpDispatcher >> marshaler [
 	^ marshaler
 ]
 
-{ #category : 'accessing' }
-MpDispatcher >> marshaler: anObject [
-
-	marshaler := anObject
-]
-
 { #category : 'message handling' }
-MpDispatcher >> unmarashal: anObject [
-	^marshaler unmarashal: anObject
+MpDispatcher >> unmarshal: anObject [
+	^marshaler unmarshal: anObject
 ]

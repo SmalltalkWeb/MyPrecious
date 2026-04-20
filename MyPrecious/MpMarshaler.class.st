@@ -45,6 +45,7 @@ MpMarshaler >> initialize [
 	super initialize.
 	exporter := MpExporter new.
 	proxyFactory := MpProxyFactory new.
+	"proxyFactory marshaler: self"
 
 ]
 
@@ -90,7 +91,7 @@ MpMarshaler >> proxyFactory: anObject [
 ]
 
 { #category : 'marshalling top level' }
-MpMarshaler >> unmarashal: anObject [
+MpMarshaler >> unmarshal: anObject [
 	^anObject unmarshalWith: self
 ]
 

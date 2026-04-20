@@ -2,7 +2,8 @@ Class {
 	#name : 'MpProxyFactory',
 	#superclass : 'Object',
 	#instVars : [
-		'addressToDispatcherDict'
+		'addressToDispatcherDict',
+		'marshaler'
 	],
 	#category : 'MyPrecious-Kernel',
 	#package : 'MyPrecious',
@@ -24,9 +25,21 @@ MpProxyFactory >> initialize [
 	addressToDispatcherDict := Dictionary new
 ]
 
+{ #category : 'accessing' }
+MpProxyFactory >> marshaler [
+
+	^ marshaler
+]
+
+{ #category : 'accessing' }
+MpProxyFactory >> marshaler: anObject [
+
+	marshaler := anObject
+]
+
 { #category : 'creating' }
 MpProxyFactory >> newDispatcherFromAddress: anMpAddress [
-	^MpRemoteDispatcher address: anMpAddress
+	^MpRemoteDispatcher address: anMpAddress marshaler: marshaler 
 ]
 
 { #category : 'creating' }

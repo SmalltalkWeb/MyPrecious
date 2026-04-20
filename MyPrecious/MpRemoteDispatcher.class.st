@@ -15,9 +15,10 @@ Class {
 }
 
 { #category : 'instance creation' }
-MpRemoteDispatcher class >> address: aMpAddress [ 
+MpRemoteDispatcher class >> address: aMpAddress marshaler: aMarshaler [
 	^self new
 		address: aMpAddress;
+		marshaler: aMarshaler;
 		yourself
 ]
 
@@ -34,9 +35,9 @@ MpRemoteDispatcher >> address: anMpAddress [
 { #category : 'message handling' }
 MpRemoteDispatcher >> dispatch: aMessage targetId: id [
 
-	| rawResponse |
+	| rawResponse | self halt.
 	rawResponse := self gateway dispatch: aMessage targetId: id.
-	^ self unmarashal: rawResponse
+	^ self unmarshal: rawResponse
 ]
 
 { #category : 'accessing' }
@@ -55,6 +56,12 @@ MpRemoteDispatcher >> gateway: anObject [
 MpRemoteDispatcher >> initialize [ 
 	super initialize.
 	idToProxyDict := Dictionary new
+]
+
+{ #category : 'accessing' }
+MpRemoteDispatcher >> marshaler: anObject [
+
+	marshaler := anObject
 ]
 
 { #category : 'proxies' }
