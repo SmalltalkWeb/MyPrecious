@@ -3,7 +3,7 @@ Class {
 	#superclass : 'Object',
 	#instVars : [
 		'id',
-		'gateway'
+		'address'
 	],
 	#category : 'MyPrecious-Kernel',
 	#package : 'MyPrecious',
@@ -18,21 +18,16 @@ MpRemoteReference class >> id: id gateway: aMpGateway [
 		yourself
 ]
 
-{ #category : 'message handling' }
-MpRemoteReference >> dispatch: aMessage [
-	^gateway dispatch: aMessage targetId: id 
+{ #category : 'accessing' }
+MpRemoteReference >> address [
+
+	^ address
 ]
 
 { #category : 'accessing' }
-MpRemoteReference >> gateway [
+MpRemoteReference >> address: anObject [
 
-	^ gateway
-]
-
-{ #category : 'accessing' }
-MpRemoteReference >> gateway: anObject [
-
-	gateway := anObject
+	address := anObject
 ]
 
 { #category : 'accessing' }
@@ -45,4 +40,9 @@ MpRemoteReference >> id [
 MpRemoteReference >> id: anObject [
 
 	id := anObject
+]
+
+{ #category : 'marshaling' }
+MpRemoteReference >> unmarshalWith: marshaler [
+	^marshaler unmarshalRemoteReference: self
 ]

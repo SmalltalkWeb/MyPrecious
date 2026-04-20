@@ -18,9 +18,10 @@ Class {
 
 { #category : 'message handling' }
 MpLocalDispatcher >> dispatch: aMessage targetId: id [
-	| receiver |
+	| receiver rawResponse |
 	receiver := self objectAt: id.
-	^aMessage sendTo: receiver
+	rawResponse := aMessage sendTo: receiver.
+	^self marashal: rawResponse
 ]
 
 { #category : 'accessing' }
@@ -39,6 +40,11 @@ MpLocalDispatcher >> exporter: anObject [
 MpLocalDispatcher >> initialize [ 
 	super initialize.
 	exporter := MpExporter new
+]
+
+{ #category : 'message handling' }
+MpLocalDispatcher >> marashal: anObject [
+	^marshaler marashal: anObject
 ]
 
 { #category : 'accessing' }

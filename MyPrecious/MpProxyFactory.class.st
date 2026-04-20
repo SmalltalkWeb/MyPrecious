@@ -2,45 +2,37 @@ Class {
 	#name : 'MpProxyFactory',
 	#superclass : 'Object',
 	#instVars : [
-		'dispatcher',
-		'addressToGatewayDict'
+		'addressToDispatcherDict'
 	],
 	#category : 'MyPrecious-Kernel',
 	#package : 'MyPrecious',
 	#tag : 'Kernel'
 }
 
-{ #category : 'accessing' }
-MpProxyFactory >> dispatcher [
-
-	^ dispatcher
-]
-
-{ #category : 'accessing' }
-MpProxyFactory >> dispatcher: anObject [
-
-	dispatcher := anObject
-]
-
 { #category : 'creating' }
-MpProxyFactory >> gatewayFromAddress: anMpAddress [
+MpProxyFactory >> dispatcherFromAddress: anMpAddress [
 
-	^addressToGatewayDict 
+	^addressToDispatcherDict 
 		at: anMpAddress 
-		ifAbsentPut: [anMpAddress asGateway].
+		ifAbsentPut: [self newDispatcherFromAddress: anMpAddress ].
 	
 ]
 
 { #category : 'initialization' }
 MpProxyFactory >> initialize [ 
 	super initialize.
-	addressToGatewayDict := Dictionary new
+	addressToDispatcherDict := Dictionary new
+]
+
+{ #category : 'creating' }
+MpProxyFactory >> newDispatcherFromAddress: anMpAddress [
+	^MpRemoteDispatcher address: anMpAddress
 ]
 
 { #category : 'creating' }
 MpProxyFactory >> proxyAtId: id address: anMpAddress [ 
-	| gateway |
-	gateway := self gatewayFromAddress: anMpAddress.
-	^gateway proxyAt: id disptacher: self dispatcher.
+	| dispatcher |
+	dispatcher := self dispatcherFromAddress: anMpAddress.
+	^dispatcher proxyAt: id
 
 ]

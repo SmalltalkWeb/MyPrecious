@@ -3,7 +3,6 @@ Class {
 	#superclass : 'Object',
 	#instVars : [
 		'localDispatcher',
-		'remoteDispatcher',
 		'proxyFactory'
 	],
 	#category : 'MyPrecious-Kernel',
@@ -23,11 +22,12 @@ MpMiddleware >> exporter [
 
 { #category : 'initialization' }
 MpMiddleware >> initialize [ 
+	| marshaller |
 	super initialize.
+	marshaller := MpMarshaler new.
 	localDispatcher := MpLocalDispatcher new.
-	remoteDispatcher := MpRemoteDispatcher new.
+	localDispatcher marshaler: marshaller.
 	proxyFactory := MpProxyFactory new.
-	proxyFactory dispatcher: remoteDispatcher 
 	
 ]
 
@@ -39,9 +39,4 @@ MpMiddleware >> localDispatcher [
 { #category : 'importing' }
 MpMiddleware >> proxyAtId: id address: anMpAddress [ 
 	^proxyFactory proxyAtId: id address: anMpAddress 
-]
-
-{ #category : 'accessing' }
-MpMiddleware >> remoteDispatcher [
-	^remoteDispatcher
 ]

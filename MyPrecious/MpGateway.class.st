@@ -1,9 +1,11 @@
+"
+Handles outgoing messages to specific host
+"
 Class {
 	#name : 'MpGateway',
 	#superclass : 'Object',
 	#instVars : [
-		'address',
-		'idToProxyDict'
+		'address'
 	],
 	#category : 'MyPrecious-Kernel',
 	#package : 'MyPrecious',
@@ -32,22 +34,4 @@ MpGateway >> address: anObject [
 { #category : 'message handling' }
 MpGateway >> dispatch: aMessage targetId: id [
 	self subclassResponsibility 
-]
-
-{ #category : 'initialization' }
-MpGateway >> initialize [ 
-	super initialize.
-	idToProxyDict := Dictionary new
-]
-
-{ #category : 'proxies' }
-MpGateway >> newProxyAt: id disptacher: aDispatcher [
-	| remoteReference |
-	remoteReference := MpRemoteReference id: id gateway: self.
-	^MpProxy reference: remoteReference dispatcher: aDispatcher
-]
-
-{ #category : 'proxies' }
-MpGateway >> proxyAt: id  disptacher: aDispatcher [
-	^idToProxyDict at: id ifAbsentPut: [ self newProxyAt: id disptacher: aDispatcher]
 ]

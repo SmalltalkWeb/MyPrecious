@@ -11,11 +11,11 @@ ProtoObject >> isPassByReference [
 ]
 
 { #category : '*MyPrecious' }
-ProtoObject >> marshalWith: aMarshaller [
-	^aMarshaller marshalObject: self
+ProtoObject >> marshalWith: aMarshaler [
+	^aMarshaler marshalObject: self
 ]
 
 { #category : '*MyPrecious' }
-ProtoObject >> unmarshalWith: aMarshaller [
-	^aMarshaller unmarshalObject: self
+ProtoObject >> unmarshalWith: aMarshaler [
+	^aMarshaler unmarshalObject: self
 ]

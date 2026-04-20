@@ -1,9 +1,12 @@
+"
+Placeholder for remote object
+"
 Class {
 	#name : 'MpProxy',
 	#superclass : 'ProtoObject',
 	#instVars : [
 		'dispatcher',
-		'targetReference'
+		'id'
 	],
 	#category : 'MyPrecious-Kernel',
 	#package : 'MyPrecious',
@@ -11,9 +14,9 @@ Class {
 }
 
 { #category : 'instance creation' }
-MpProxy class >> reference: aReference dispatcher: aDispatcher [ 
+MpProxy class >> id: anId dispatcher: aDispatcher [
 	^self new
-		reference: aReference dispatcher: aDispatcher;
+		id: anId dispatcher: aDispatcher;
 		yourself
 ]
 
@@ -27,13 +30,18 @@ MpProxy >> class [
 { #category : 'reflective operations' }
 MpProxy >> doesNotUnderstand: aMessage [
 
-	^ dispatcher dispatch: aMessage targetReference: targetReference
+	^ dispatcher dispatch: aMessage targetId: id
 ]
 
 { #category : 'initialization' }
-MpProxy >> reference: aReference dispatcher: aDispatcher [
-	targetReference := aReference.
+MpProxy >> id: anId dispatcher: aDispatcher [
+	id := anId.
 	dispatcher := aDispatcher
+]
+
+{ #category : 'marshaling' }
+MpProxy >> marshalWith: marshaler [
+	^marshaler marshalProxyId: id dispatcher: dispatcher 
 ]
 
 { #category : 'accessing' }

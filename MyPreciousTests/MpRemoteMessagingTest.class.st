@@ -58,8 +58,8 @@ MpRemoteMessagingTest >> testExceptionResponseMessage [
 
 { #category : 'running' }
 MpRemoteMessagingTest >> testMessagesUnderstoodByProxy [
-	proxy reference: nil dispatcher: nil.
-	self assert: proxy == proxy equals: true.
+	proxy id: nil dispatcher: nil.
+	self assert: proxy == proxy. "Testing for #== message"
 	self assert: proxy yourself identicalTo: proxy.
 	self deny: proxy isNil.
 	
@@ -88,6 +88,14 @@ MpRemoteMessagingTest >> testNormalResponseMessage [
 ]
 
 { #category : 'running' }
+MpRemoteMessagingTest >> testNormalResponseProxified [
+
+	target selector: #me actionBlock: [target].	
+	self assert: proxy me identicalTo: proxy.
+
+]
+
+{ #category : 'running' }
 MpRemoteMessagingTest >> testOtherObjectResponseProxified [
 
 	| other otherProxy |
@@ -97,14 +105,6 @@ MpRemoteMessagingTest >> testOtherObjectResponseProxified [
 	otherProxy := proxy other.
 	self assertIsProxy: otherProxy.
 	self assert: otherProxy answerAll equals: 42
-]
-
-{ #category : 'running' }
-MpRemoteMessagingTest >> testTargetObjectResponseProxified [
-
-	target selector: #me actionBlock: [target].	
-	self assert: proxy me identicalTo: proxy.
-
 ]
 
 { #category : 'running' }
