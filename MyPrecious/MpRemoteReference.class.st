@@ -11,10 +11,10 @@ Class {
 }
 
 { #category : 'instance' }
-MpRemoteReference class >> id: id gateway: aMpGateway [
+MpRemoteReference class >> id: id address: anAddress [
 	^self new
 		id: id;
-		gateway: aMpGateway;
+		address: anAddress;
 		yourself
 ]
 

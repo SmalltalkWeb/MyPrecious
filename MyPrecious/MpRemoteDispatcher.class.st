@@ -21,9 +21,22 @@ MpRemoteDispatcher class >> address: aMpAddress [
 		yourself
 ]
 
-{ #category : 'initialization' }
+{ #category : 'accessing' }
+MpRemoteDispatcher >> address [
+	^self gateway address
+]
+
+{ #category : 'accessing' }
 MpRemoteDispatcher >> address: anMpAddress [
 	self gateway: anMpAddress asGateway 
+]
+
+{ #category : 'message handling' }
+MpRemoteDispatcher >> dispatch: aMessage targetId: id [
+
+	| rawResponse |
+	rawResponse := self gateway dispatch: aMessage targetId: id.
+	^ self unmarashal: rawResponse
 ]
 
 { #category : 'accessing' }

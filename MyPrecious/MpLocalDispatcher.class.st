@@ -8,46 +8,50 @@ Response is marshalled then serialized before returning it.
 Class {
 	#name : 'MpLocalDispatcher',
 	#superclass : 'MpDispatcher',
-	#instVars : [
-		'exporter'
-	],
 	#category : 'MyPrecious-Kernel',
 	#package : 'MyPrecious',
 	#tag : 'Kernel'
 }
 
+{ #category : 'accessing' }
+MpLocalDispatcher >> address [
+	^marshaler address
+]
+
+{ #category : 'accessing' }
+MpLocalDispatcher >> address: anAddress [
+	marshaler address: anAddress
+]
+
 { #category : 'message handling' }
 MpLocalDispatcher >> dispatch: aMessage targetId: id [
-	| receiver rawResponse |
+
+	| rawResponse receiver |
 	receiver := self objectAt: id.
 	rawResponse := aMessage sendTo: receiver.
-	^self marashal: rawResponse
+	^ self marashal: rawResponse
 ]
 
 { #category : 'accessing' }
 MpLocalDispatcher >> exporter [
 
-	^ exporter
-]
-
-{ #category : 'accessing' }
-MpLocalDispatcher >> exporter: anObject [
-
-	exporter := anObject
+	^ marshaler exporter
 ]
 
 { #category : 'initialization' }
 MpLocalDispatcher >> initialize [ 
 	super initialize.
-	exporter := MpExporter new
-]
+	marshaler := MpMarshaler new.
 
-{ #category : 'message handling' }
-MpLocalDispatcher >> marashal: anObject [
-	^marshaler marashal: anObject
 ]
 
 { #category : 'accessing' }
 MpLocalDispatcher >> objectAt: id [
 	^self exporter objectAt: id
+]
+
+{ #category : 'accessing' }
+MpLocalDispatcher >> proxyFactory [
+
+	^ marshaler proxyFactory
 ]

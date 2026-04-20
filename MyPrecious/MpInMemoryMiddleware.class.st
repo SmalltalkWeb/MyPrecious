@@ -8,5 +8,11 @@ Class {
 
 { #category : 'accessing' }
 MpInMemoryMiddleware >> address [
+	^localDispatcher address
+]
+
+{ #category : 'initialization' }
+MpInMemoryMiddleware >> newAddress [
+
 	^MpInMemoryAddress targetDispatcher: self localDispatcher 
 ]
