@@ -1,6 +1,8 @@
 Class {
 	#name : 'MpMiddlewareStructureTest',
 	#superclass : 'TestCase',
+	#traits : 'MpTProxyTest',
+	#classTraits : 'MpTProxyTest classTrait',
 	#instVars : [
 		'receiverMiddleware',
 		'senderMiddleware'
@@ -25,14 +27,12 @@ MpMiddlewareStructureTest >> targetReferenceSlotValueInProxy: proxy1 [
 
 { #category : 'proxy testing' }
 MpMiddlewareStructureTest >> testForgeProxy [
-	| id proxy remoteReference dispatcher |
+	| id proxy |
 	id := #someIdentifier.
 	proxy := senderMiddleware proxyAtId: id address: receiverMiddleware address.
-	dispatcher := (MpProxy slotNamed: #dispatcher) read: proxy.
-	self assert: dispatcher identicalTo: senderMiddleware remoteDispatcher.
-	remoteReference := self targetReferenceSlotValueInProxy: proxy. 
-	self assert: remoteReference id equals: id.
-	self assert: remoteReference gateway address equals: receiverMiddleware address.
+	self assertIsProxy: proxy.
+	self assertProxy: proxy hasId: id.
+	self assertProxy: proxy hasAddress: receiverMiddleware address.
 
 ]
 
@@ -60,38 +60,33 @@ MpMiddlewareStructureTest >> testSameProxyForSameIdEqualAdresses [
 ]
 
 { #category : 'proxy testing' }
-MpMiddlewareStructureTest >> testTwoProxiesDifferentIdSameAdressHaveIdenticalGateway [
-
-	| proxy1 remoteReference1 proxy2 remoteReference2 |
+MpMiddlewareStructureTest >> testTwoProxiesDifferentIdSameAdressHaveIdenticalDispatchers [
+	| proxy1 proxy2 dispacher1 dispacher2 |
 	proxy1 := senderMiddleware
 		          proxyAtId: #o1
 		          address: receiverMiddleware address.
-	remoteReference1 := self targetReferenceSlotValueInProxy: proxy1.
 	proxy2 := senderMiddleware
 		          proxyAtId: #o2
 		          address: receiverMiddleware address.
-	remoteReference2 := (MpProxy slotNamed: #targetReference) read:
-		                    proxy2.
+	dispacher1 := self dispatcherSlotValueInProxy: proxy1.
+	dispacher2 := self dispatcherSlotValueInProxy: proxy2.
 	self
-		assert: remoteReference1 gateway
-		identicalTo: remoteReference2 gateway
+		assert: dispacher1
+		identicalTo: dispacher2
 ]
 
 { #category : 'proxy testing' }
-MpMiddlewareStructureTest >> testTwoProxiesSameIdDiffrentAdressesHaveDifferentGateway [
-
-	| proxy1 id remoteReference1 proxy2 remoteReference2 |
-	id := #myObject.
+MpMiddlewareStructureTest >> testTwoProxiesSameIdDiffrentAdressesHaveDifferentDispatchers [
+	| proxy1 proxy2 dispacher1 dispacher2 |
 	proxy1 := senderMiddleware
-		          proxyAtId: id
+		          proxyAtId: #o1
 		          address: receiverMiddleware address.
-	remoteReference1 := self targetReferenceSlotValueInProxy: proxy1.
 	proxy2 := senderMiddleware
-		          proxyAtId: id
+		          proxyAtId: #o2
 		          address: MpInMemoryAddress new.
-	remoteReference2 := (MpProxy slotNamed: #targetReference) read:
-		                    proxy2.
+	dispacher1 := self dispatcherSlotValueInProxy: proxy1.
+	dispacher2 := self dispatcherSlotValueInProxy: proxy2.
 	self
-		deny: remoteReference1 gateway
-		equals: remoteReference2 gateway
+		deny: dispacher1
+		equals: dispacher2
 ]
