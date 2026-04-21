@@ -19,8 +19,8 @@ MpDispatcher >> dispatch: aMessage targetId: id [
 ]
 
 { #category : 'message handling' }
-MpDispatcher >> marashal: anObject [
-	^marshaler marashal: anObject
+MpDispatcher >> marshal: anObject [
+	^marshaler marshal: anObject
 ]
 
 { #category : 'accessing' }

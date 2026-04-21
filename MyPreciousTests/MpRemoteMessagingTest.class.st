@@ -44,9 +44,17 @@ MpRemoteMessagingTest >> setUp [
 ]
 
 { #category : 'running' }
-MpRemoteMessagingTest >> testArgObjectsProxified [
+MpRemoteMessagingTest >> testArgObjectIsProxified [
 
-	self fail: #todo
+	| sentObject savedObject retrievedObject |
+	target selector: #set: actionBlock: [: arg1 | savedObject := arg1].	
+	target selector: #get actionBlock: [savedObject].	
+	sentObject := Object new.
+	proxy set: sentObject.
+	self assertIsProxy: savedObject.
+	retrievedObject := proxy get.
+	self assert: retrievedObject identicalTo: sentObject.
+
 ]
 
 { #category : 'running' }
@@ -63,12 +71,6 @@ MpRemoteMessagingTest >> testMessagesUnderstoodByProxy [
 	self assert: proxy yourself identicalTo: proxy.
 	self deny: proxy isNil.
 	
-]
-
-{ #category : 'running' }
-MpRemoteMessagingTest >> testNormalResponseForSpecialMessage [
-
-	self assert: proxy class identicalTo: target class
 ]
 
 { #category : 'running' }

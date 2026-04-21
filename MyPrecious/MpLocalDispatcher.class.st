@@ -13,13 +13,6 @@ Class {
 	#tag : 'Kernel'
 }
 
-{ #category : 'instance creation' }
-MpLocalDispatcher class >> address: aMpAddress [ 
-	^self new
-		address: aMpAddress;
-		yourself
-]
-
 { #category : 'accessing' }
 MpLocalDispatcher >> address [
 	^marshaler address
@@ -31,12 +24,13 @@ MpLocalDispatcher >> address: anAddress [
 ]
 
 { #category : 'message handling' }
-MpLocalDispatcher >> dispatch: aMessage targetId: id [
+MpLocalDispatcher >> dispatch: marshaledMessage targetId: id [
 
-	| rawResponse receiver |
+	| rawResponse receiver unmarshaledMessage |
 	receiver := self objectAt: id.
-	rawResponse := aMessage sendTo: receiver.
-	^ self marashal: rawResponse
+	unmarshaledMessage := self unmarshal: marshaledMessage.
+	rawResponse := unmarshaledMessage sendTo: receiver.
+	^ self marshal: rawResponse
 ]
 
 { #category : 'accessing' }

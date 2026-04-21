@@ -13,6 +13,13 @@ MpTProxyTest >> assertIsProxy: aProxy [
 ]
 
 { #category : 'asserting' }
+MpTProxyTest >> assertProxy: aProxy hasAddress: expectedAddress [
+	| actualDispatcher |
+	actualDispatcher := self dispatcherSlotValueInProxy: aProxy.
+	self assert: actualDispatcher address equals: expectedAddress 
+]
+
+{ #category : 'asserting' }
 MpTProxyTest >> assertProxy: aProxy hasDispatcher: expectedDispatcher [
 	| actualDispatcher |
 	actualDispatcher := self dispatcherSlotValueInProxy: aProxy.

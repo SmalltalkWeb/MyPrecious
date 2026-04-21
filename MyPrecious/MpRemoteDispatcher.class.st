@@ -33,10 +33,11 @@ MpRemoteDispatcher >> address: anMpAddress [
 ]
 
 { #category : 'message handling' }
-MpRemoteDispatcher >> dispatch: aMessage targetId: id [
+MpRemoteDispatcher >> dispatch: rawMessage targetId: id [
 
-	| rawResponse |
-	rawResponse := self gateway dispatch: aMessage targetId: id.
+	| rawResponse marshaledMessage |
+	marshaledMessage := self marshal: rawMessage.
+	rawResponse := self gateway dispatch: marshaledMessage targetId: id.
 	^ self unmarshal: rawResponse
 ]
 

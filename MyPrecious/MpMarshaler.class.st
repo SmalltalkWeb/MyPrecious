@@ -50,8 +50,16 @@ MpMarshaler >> initialize [
 ]
 
 { #category : 'marshalling top level' }
-MpMarshaler >> marashal: anObject [
+MpMarshaler >> marshal: anObject [
 	^anObject marshalWith: self
+]
+
+{ #category : 'marshalling top level' }
+MpMarshaler >> marshalMessage: aMessage [
+
+	| marshaledArgs |
+	marshaledArgs := aMessage arguments collect: [: each | self marshal: each]. 
+	^Message selector: aMessage selector arguments: marshaledArgs
 ]
 
 { #category : 'marshalling top level' }
@@ -93,6 +101,14 @@ MpMarshaler >> proxyFactory: anObject [
 { #category : 'marshalling top level' }
 MpMarshaler >> unmarshal: anObject [
 	^anObject unmarshalWith: self
+]
+
+{ #category : 'marshalling top level' }
+MpMarshaler >> unmarshalMessage: aMessage [
+
+	| unmarshaledArgs |
+	unmarshaledArgs := aMessage arguments collect: [: each | self unmarshal: each]. 
+	^Message selector: aMessage selector arguments: unmarshaledArgs
 ]
 
 { #category : 'marshalling top level' }

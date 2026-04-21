@@ -22,7 +22,10 @@ MpMiddleware >> exporter [
 { #category : 'initialization' }
 MpMiddleware >> initialize [ 
 	super initialize.
-	localDispatcher := MpLocalDispatcher address: self newAddress
+	localDispatcher := MpLocalDispatcher new.
+	"First create local dispatcher before creating address, 
+	because address can require the local dispatcher"
+	localDispatcher address: self newAddress
 	
 ]
 
