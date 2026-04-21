@@ -76,6 +76,7 @@ MpRemoteMessagingTest >> testMessagesUnderstoodByProxy [
 { #category : 'running' }
 MpRemoteMessagingTest >> testNormalResponseMessage [
 
+	| proxyOnArray |
 	target selector: #unary actionBlock: [ 42 ].
 	self assert: proxy unary equals: 42.
 	target selector: #+ actionBlock: [ :arg | arg + 1 ].
@@ -84,9 +85,11 @@ MpRemoteMessagingTest >> testNormalResponseMessage [
 		{
 			x.
 			y } ].
+	proxyOnArray := proxy foo: 'Hello' bar: #World.
+	self assertIsProxy: proxyOnArray.
 	self
-		assert: (proxy foo: 'Hello' bar: #World)
-		equals: { 'Hello'. #World }
+		assertCollection: proxyOnArray
+		hasSameElements: { 'Hello'. #World }
 ]
 
 { #category : 'running' }
