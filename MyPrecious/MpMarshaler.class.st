@@ -45,7 +45,7 @@ MpMarshaler >> initialize [
 	super initialize.
 	exporter := MpExporter new.
 	proxyFactory := MpProxyFactory new.
-	"proxyFactory marshaler: self"
+	proxyFactory marshaler: self
 
 ]
 

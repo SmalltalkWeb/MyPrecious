@@ -11,6 +11,11 @@ Class {
 	#tag : 'Kernel'
 }
 
+{ #category : 'helpers' }
+MpMarshalerTest >> export: exportedObject id: id [
+	marshaler exporter export: exportedObject id: id
+]
+
 { #category : 'running' }
 MpMarshalerTest >> exporter [
 	^marshaler exporter
@@ -64,7 +69,20 @@ MpMarshalerTest >> testUnmarshalPassByCopyObject [
 ]
 
 { #category : 'running' }
-MpMarshalerTest >> testUnmarshalRemoteReference [
+MpMarshalerTest >> testUnmarshalRemoteReferenceToLocalObject [
+	| remoteReference unmarshalledObject exportedObject id |
+	exportedObject := Object new.
+	id := #myObject.
+	self export: exportedObject id: id.
+	remoteReference := MpRemoteReference id: id address: marshaler address.
+	unmarshalledObject := marshaler unmarshal: remoteReference.
+	self assert: unmarshalledObject identicalTo: exportedObject.
+	
+	
+]
+
+{ #category : 'running' }
+MpMarshalerTest >> testUnmarshalRemoteReferenceToProxy [
 	| remoteReference proxy dispatcher |
 	remoteReference := MpRemoteReference id: #someObject address: MpInMemoryAddress new.
 	proxy := marshaler unmarshal: remoteReference.
@@ -72,5 +90,16 @@ MpMarshalerTest >> testUnmarshalRemoteReference [
 	self assertProxy: proxy hasId: remoteReference id.
 	dispatcher := self dispatcherSlotValueInProxy: proxy.
 	self assert: dispatcher address equals: remoteReference address.
+	self assert: dispatcher marshaler identicalTo: marshaler.
 	
+	
+]
+
+{ #category : 'running' }
+MpMarshalerTest >> testUnmarshalRemoteReferenceToProxyTwice [
+	| remoteReference proxyA proxyB |
+	remoteReference := MpRemoteReference id: #someObject address: MpInMemoryAddress new.
+	proxyA := marshaler unmarshal: remoteReference.
+	proxyB := marshaler unmarshal: remoteReference.
+	self assert: proxyB identicalTo: proxyA	
 ]
