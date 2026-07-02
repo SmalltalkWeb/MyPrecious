@@ -1,5 +1,5 @@
 Class {
-	#name : 'MpTcpMiddleware',
+	#name : 'MpTcpMiddlewareOLD',
 	#superclass : 'MpMiddlewareOLD',
 	#traits : 'MpTNetMiddleware',
 	#classTraits : 'MpTNetMiddleware classTrait',
@@ -9,11 +9,11 @@ Class {
 }
 
 { #category : 'initialization' }
-MpTcpMiddleware >> addressClass [
+MpTcpMiddlewareOLD >> addressClass [
 	^MpIpFullAddress 
 ]
 
 { #category : 'initialization' }
-MpTcpMiddleware >> transporterClass [
+MpTcpMiddlewareOLD >> transporterClass [
 	^MpTcpConnectedTransporter
 ]
