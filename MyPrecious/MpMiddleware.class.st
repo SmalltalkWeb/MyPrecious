@@ -9,6 +9,11 @@ Class {
 	#tag : 'Kernel'
 }
 
+{ #category : 'accessing' }
+MpMiddleware >> address [
+	^localDispatcher address
+]
+
 { #category : 'exporting' }
 MpMiddleware >> export: anObject id: anId [ 
 	^self exporter export: anObject id: anId

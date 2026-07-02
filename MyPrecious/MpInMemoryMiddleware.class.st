@@ -6,11 +6,6 @@ Class {
 	#tag : 'Kernel'
 }
 
-{ #category : 'accessing' }
-MpInMemoryMiddleware >> address [
-	^localDispatcher address
-]
-
 { #category : 'initialization' }
 MpInMemoryMiddleware >> newAddress [
 
