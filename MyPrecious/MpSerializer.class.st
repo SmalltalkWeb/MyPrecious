@@ -36,7 +36,7 @@ MpSerializer class >> serialize: anObject toStream: aStream [
 	sizeDigitsCount > 255 ifTrue: [ 
 		self error: 'Content is too large!' ].
 	aStream 
-		<< sizeDigitsCount;
-		<< bytesSize asByteArray;
-		<< bytes
+		nextPut: sizeDigitsCount;
+		nextPutAll: bytesSize;
+		nextPutAll: bytes
 ]
