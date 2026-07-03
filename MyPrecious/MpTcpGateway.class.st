@@ -12,7 +12,7 @@ MpTcpGateway >> dispatch: aMessage targetId: id [
 	| stream answer | 
 	stream := ZdcSocketStream openConnectionToHost: self address ip port: self address port.
 	MpSerializer serialize: {aMessage. id} toStream: stream.
+	stream flush.
 	answer := MpSerializer materializeFromStream: stream.
-	stream close.
-	^answer 
+	^answer
 ]

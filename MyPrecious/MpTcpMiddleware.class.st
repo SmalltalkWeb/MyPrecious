@@ -16,7 +16,8 @@ MpTcpMiddleware >> dispatchMessageFromStream: stream [
 	message := remoteMessage first.
 	id := remoteMessage last.
 	answer := localDispatcher dispatch: message targetId: id.
-	MpSerializer serialize: answer toStream: stream
+	MpSerializer serialize: answer toStream: stream.
+	stream flush
 ]
 
 { #category : 'initialization' }
