@@ -24,7 +24,7 @@ MpExceptionResponse >> unmarshalWith: aMarshaler [
 
 { #category : 'evaluating' }
 MpExceptionResponse >> value [
-	MpRemoteException signal: self basicValue 
+	self basicValue signal
 ]
 
 { #category : 'accessing' }

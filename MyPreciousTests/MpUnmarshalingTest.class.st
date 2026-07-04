@@ -18,17 +18,18 @@ MpUnmarshalingTest >> setUp [
 
 { #category : 'running' }
 MpUnmarshalingTest >> testUnmarshalExceptionResponse [
+
 	| originException response marshaledResponse unmarshalledResponse remoteException |
 	originException := ZeroDivide dividend: 395.
 	response := MpExceptionResponse value: originException.
 	marshaledResponse := marshaler marshal: response.
 	unmarshalledResponse := otherMarshaler unmarshal: marshaledResponse.
 	remoteException := unmarshalledResponse basicValue.
-	self assertClassOf: remoteException is: MpRemoteException. 
+	self assertClassOf: remoteException is: MpRemoteException.
 	self assertIsProxy: remoteException exceptionProxy.
+	"Remote exception and Proxy both redefine the #class method"
 	self assert: remoteException class equals: originException class.
-	self assert: remoteException messageText equals: originException messageText 
-	
+	self assert: remoteException messageText equals: originException messageText
 ]
 
 { #category : 'running' }

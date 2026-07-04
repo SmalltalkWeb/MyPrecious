@@ -29,8 +29,11 @@ MpLocalDispatcher >> dispatch: marshaledMessage targetId: id [
 	| rawResponse receiver unmarshaledMessage |
 	receiver := self objectAt: id.
 	unmarshaledMessage := self unmarshal: marshaledMessage.
-	rawResponse := unmarshaledMessage sendTo: receiver.
-	^ MpNormalResponse value: (self marshal: rawResponse)
+	^ [
+		  rawResponse := unmarshaledMessage sendTo: receiver.
+		  self marshalResponseClass: MpNormalResponse value: rawResponse ]
+		  on: Exception
+		  do: [ :ex | self marshalResponseClass: MpExceptionResponse value: ex ]
 ]
 
 { #category : 'accessing' }
@@ -44,6 +47,14 @@ MpLocalDispatcher >> initialize [
 	super initialize.
 	marshaler := MpMarshaler new.
 
+]
+
+{ #category : 'message handling' }
+MpLocalDispatcher >> marshalResponseClass: aResponseClass value: anObject [
+
+	| response |
+	response := aResponseClass value: anObject.
+	^self marshal: response
 ]
 
 { #category : 'accessing' }

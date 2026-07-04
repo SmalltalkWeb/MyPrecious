@@ -51,10 +51,21 @@ MpRemoteMessagingTest >> testArgObjectIsProxified [
 ]
 
 { #category : 'running' }
+MpRemoteMessagingTest >> testEnsureMiddlewaresHaveDifferentAddresses [
+	self deny: senderMiddleware address equals: receiverMiddleware address
+]
+
+{ #category : 'running' }
 MpRemoteMessagingTest >> testExceptionResponseMessage [
 
+	| capturedException |
 	target selector: #divide:by: actionBlock: [ :x :y | x / y ].
-	self should: [ proxy divide: 9 by: 0 ] raise: ZeroDivide
+	self should: [ proxy divide: 9 by: 0 ] raise: ZeroDivide.
+	[ proxy divide: 89 by: 0 ]
+		on: ZeroDivide
+		do: [ :ex | capturedException := ex ].
+	self assertClassOf: capturedException is: MpRemoteException.
+	self assertIsProxy: capturedException exceptionProxy
 ]
 
 { #category : 'running' }
