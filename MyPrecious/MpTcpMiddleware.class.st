@@ -11,11 +11,12 @@ Class {
 
 { #category : 'initialization' }
 MpTcpMiddleware >> dispatchMessageFromStream: stream [
+
 	| remoteMessage message id answer |
 	remoteMessage := MpSerializer materializeFromStream: stream.
 	message := remoteMessage first.
 	id := remoteMessage last.
-	answer := [localDispatcher dispatch: message targetId: id] on: Exception do: [: ex| ex].
+	answer := localDispatcher dispatch: message targetId: id.
 	MpSerializer serialize: answer toStream: stream.
 	stream flush
 ]
