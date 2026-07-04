@@ -59,12 +59,14 @@ MpUnmarshalingTest >> testUnmarshalMessage1ArgPassByCopyObject [
 { #category : 'running' }
 MpUnmarshalingTest >> testUnmarshalMessage1ArgRemoteReferenceToLocalObject [
 
-	| rawMessage unmarshaledMessage selector arg originalArg |
+	| originalMessage unmarshaledMessage selector originalArg marshaledMessage marshaledArg |
 	selector := #bar:.
 	originalArg := Object new.
-	arg := marshaler marshal: originalArg.
-	rawMessage := Message selector: selector argument: arg.
-	unmarshaledMessage := marshaler unmarshal: rawMessage.
+	originalMessage := Message selector: selector argument: originalArg.
+	marshaledMessage := marshaler marshal: originalMessage.
+	marshaledArg := marshaledMessage argument.
+	self assert: marshaledArg address identicalTo: marshaler address.
+	unmarshaledMessage := marshaler unmarshal: marshaledMessage.
 	self assertMessage: unmarshaledMessage selector: selector.
 	self assert: unmarshaledMessage argument identicalTo: originalArg
 ]
@@ -72,11 +74,12 @@ MpUnmarshalingTest >> testUnmarshalMessage1ArgRemoteReferenceToLocalObject [
 { #category : 'running' }
 MpUnmarshalingTest >> testUnmarshalMessage1ArgRemoteReferenceToProxy [
 
-	| rawMessage unmarshaledMessage selector remoteReference proxy |
+	| unmarshaledMessage selector proxy originalMessage marshaledMessage remoteReference |
 	selector := #bar:.
-	remoteReference := MpRemoteReference id: #someObject address: MpInMemoryAddress new.
-	rawMessage := Message selector: selector argument: remoteReference.
-	unmarshaledMessage := otherMarshaler unmarshal: rawMessage.
+	originalMessage := Message selector: selector argument: Object new.
+	marshaledMessage := marshaler marshal: originalMessage.
+	remoteReference := marshaledMessage argument.
+	unmarshaledMessage := otherMarshaler unmarshal: marshaledMessage.
 	self assertMessage: unmarshaledMessage selector: selector.
 	proxy := unmarshaledMessage argument.
 	self assertIsProxy: proxy.
@@ -87,11 +90,12 @@ MpUnmarshalingTest >> testUnmarshalMessage1ArgRemoteReferenceToProxy [
 { #category : 'running' }
 MpUnmarshalingTest >> testUnmarshalMessage2ArgsPassByCopyObjects [
 
-	| rawMessage unmarshaledMessage selector args unmarshaledArgs |
+	| rawMessage unmarshaledMessage selector args unmarshaledArgs marshaledMessage |
 	selector := #foo:bar:.
 	args := #( 'hello' 42 ).
 	rawMessage := Message selector: selector arguments: args.
-	unmarshaledMessage := otherMarshaler unmarshal: rawMessage.
+	marshaledMessage := marshaler marshal: rawMessage.
+	unmarshaledMessage := otherMarshaler unmarshal: marshaledMessage.
 	self assertMessage: unmarshaledMessage selector: selector.
 	unmarshaledArgs := unmarshaledMessage arguments.
 	self assertCollection: unmarshaledArgs hasSameElements: args
@@ -175,9 +179,10 @@ MpUnmarshalingTest >> testUnmarshalRemoteReferenceToProxy [
 
 { #category : 'running' }
 MpUnmarshalingTest >> testUnmarshalRemoteReferenceToProxyTwice [
+
 	| remoteReference proxyA proxyB |
 	remoteReference := marshaler marshal: Object new.
-	proxyA := marshaler unmarshal: remoteReference.
-	proxyB := marshaler unmarshal: remoteReference.
-	self assert: proxyB identicalTo: proxyA	
+	proxyA := otherMarshaler unmarshal: remoteReference.
+	proxyB := otherMarshaler unmarshal: remoteReference.
+	self assert: proxyB identicalTo: proxyA
 ]
