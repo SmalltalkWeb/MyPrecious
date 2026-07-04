@@ -37,20 +37,6 @@ MpRemoteMessagingTest >> setUp [
 ]
 
 { #category : 'running' }
-MpRemoteMessagingTest >> testArgObjectIsProxified [
-
-	| sentObject savedObject retrievedObject |
-	target selector: #set: actionBlock: [: arg1 | savedObject := arg1].	
-	target selector: #get actionBlock: [savedObject].	
-	sentObject := Object new.
-	proxy set: sentObject.
-	self assertIsProxy: savedObject.
-	retrievedObject := proxy get.
-	self assert: retrievedObject identicalTo: sentObject.
-
-]
-
-{ #category : 'running' }
 MpRemoteMessagingTest >> testEnsureMiddlewaresHaveDifferentAddresses [
 	self deny: senderMiddleware address equals: receiverMiddleware address
 ]
@@ -66,6 +52,21 @@ MpRemoteMessagingTest >> testExceptionResponseMessage [
 		do: [ :ex | capturedException := ex ].
 	self assertClassOf: capturedException is: MpRemoteException.
 	self assertIsProxy: capturedException exceptionProxy
+]
+
+{ #category : 'running' }
+MpRemoteMessagingTest >> testLocalObjectRoundTripArgThenResponse [
+
+	| sentObject savedObject retrievedObject |
+	target selector: #set: actionBlock: [ :arg1 | savedObject := arg1 ].
+	target selector: #get actionBlock: [ savedObject ].
+	sentObject := Object new.
+	proxy set: sentObject.
+	self assertIsProxy: savedObject.
+	self assertProxy: savedObject hasAddress: senderMiddleware address.
+	retrievedObject := proxy get.
+	self denyIsProxy: retrievedObject.
+	self assert: retrievedObject identicalTo: sentObject
 ]
 
 { #category : 'running' }
