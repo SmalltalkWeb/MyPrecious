@@ -118,7 +118,7 @@ MpMarshaler >> unmarshalObject: anObject [
 
 { #category : 'marshalling top level' }
 MpMarshaler >> unmarshalRemoteReference: aRemoteReference [
-	aRemoteReference address == self address ifTrue: [ ^self objectAt: aRemoteReference id ].
+	aRemoteReference address = self address ifTrue: [ ^self objectAt: aRemoteReference id ].
 	^self 
 		proxyAtId: aRemoteReference id 
 		address: aRemoteReference address
