@@ -30,7 +30,9 @@ MpProxy >> class [
 { #category : 'reflective operations' }
 MpProxy >> doesNotUnderstand: aMessage [
 
-	^ dispatcher dispatch: aMessage targetId: id
+	| remoteResponse |
+	remoteResponse := dispatcher dispatch: aMessage targetId: id.
+	^ remoteResponse value
 ]
 
 { #category : 'initialization' }

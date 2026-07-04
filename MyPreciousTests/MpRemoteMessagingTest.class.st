@@ -1,6 +1,8 @@
 Class {
 	#name : 'MpRemoteMessagingTest',
 	#superclass : 'TestCase',
+	#traits : 'MpTProxyTest',
+	#classTraits : 'MpTProxyTest classTrait',
 	#instVars : [
 		'proxy',
 		'target',
@@ -15,15 +17,6 @@ Class {
 { #category : 'testing' }
 MpRemoteMessagingTest class >> isAbstract [ 
 	^self == MpRemoteMessagingTest 
-]
-
-{ #category : 'running' }
-MpRemoteMessagingTest >> assertIsProxy: anObject [
-	"MpProxy overrides #class method to answer the receiver's actual class"
-	
-	| classMethod |
-	classMethod := ProtoObject compiledMethodAt: #class.
-	self assert: (classMethod valueWithReceiver: anObject) identicalTo: MpProxy	
 ]
 
 { #category : 'running' }
@@ -105,21 +98,15 @@ MpRemoteMessagingTest >> testNormalResponseMessagePassByCopy [
 { #category : 'running' }
 MpRemoteMessagingTest >> testNormalResponseProxified [
 
+	| otherTarget otherProxy |
 	target selector: #me actionBlock: [target].	
 	self assert: proxy me identicalTo: proxy.
-
-]
-
-{ #category : 'running' }
-MpRemoteMessagingTest >> testOtherObjectResponseProxified [
-
-	| other otherProxy |
-	other := MpMock new.
-	other selector: #answerAll actionBlock: [ 42 ].
-	target selector: #other actionBlock: [ other ].
+	otherTarget := MpMock new.
+	otherTarget selector: #root actionBlock: [ target ].
+	target selector: #other actionBlock: [ otherTarget ].
 	otherProxy := proxy other.
 	self assertIsProxy: otherProxy.
-	self assert: otherProxy answerAll equals: 42
+	self assert: otherProxy root identicalTo: proxy
 ]
 
 { #category : 'running' }

@@ -447,7 +447,7 @@ MpMiddlewareTestOLD >> testRemoteMessageRaisesException [
 	| remoteReference proxy |
 	remoteReference := middlewareA export: Object new.
 	proxy := middlewareB objectAt: remoteReference.
-	self should: [proxy foo] raise: MpRemoteExceptionWrapper
+	self should: [proxy foo] raise: MpRemoteExceptionWrapperOLD
 ]
 
 { #category : 'tests' }

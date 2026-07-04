@@ -30,7 +30,7 @@ MpLocalDispatcher >> dispatch: marshaledMessage targetId: id [
 	receiver := self objectAt: id.
 	unmarshaledMessage := self unmarshal: marshaledMessage.
 	rawResponse := unmarshaledMessage sendTo: receiver.
-	^ self marshal: rawResponse
+	^ MpNormalResponse value: (self marshal: rawResponse)
 ]
 
 { #category : 'accessing' }

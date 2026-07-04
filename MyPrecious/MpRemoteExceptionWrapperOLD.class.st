@@ -1,5 +1,5 @@
 Class {
-	#name : 'MpRemoteExceptionWrapper',
+	#name : 'MpRemoteExceptionWrapperOLD',
 	#superclass : 'Error',
 	#category : 'MyPrecious-Kernel-OLD',
 	#package : 'MyPrecious',
@@ -7,7 +7,7 @@ Class {
 }
 
 { #category : 'instance creation' }
-MpRemoteExceptionWrapper class >> on: exception [
+MpRemoteExceptionWrapperOLD class >> on: exception [
 	^self new
 		messageText: exception description;
 		yourself
