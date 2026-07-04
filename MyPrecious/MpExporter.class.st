@@ -35,7 +35,8 @@ MpExporter >> initialize [
 
 { #category : 'exporting' }
 MpExporter >> newFreeId [
-	^DateAndTime now asString
+
+	^ MpIdGenerator newId
 ]
 
 { #category : 'accessing' }
