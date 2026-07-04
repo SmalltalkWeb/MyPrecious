@@ -11,9 +11,10 @@ Class {
 
 { #category : 'running' }
 MpUnmarshalingTest >> setUp [
+
 	super setUp.
 	otherMarshaler := MpMarshaler new.
-	otherMarshaler address: MpInMemoryAddress new
+	otherMarshaler address: self newAddress 
 ]
 
 { #category : 'running' }
