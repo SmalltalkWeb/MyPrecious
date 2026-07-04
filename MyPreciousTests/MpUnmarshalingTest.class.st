@@ -148,13 +148,15 @@ MpUnmarshalingTest >> testUnmarshalPassByCopyObject [
 
 { #category : 'running' }
 MpUnmarshalingTest >> testUnmarshalRemoteReferenceToLocalObject [
-	| remoteReference unmarshalledObject exportedObject |
+
+	| remoteReferenceFromObject unmarshalledObject exportedObject proxy remoteReferenceFromProxy |
 	exportedObject := Object new.
-	remoteReference := marshaler marshal: exportedObject.
-	unmarshalledObject := marshaler unmarshal: remoteReference.
-	self assert: unmarshalledObject identicalTo: exportedObject.
-	
-	
+	remoteReferenceFromObject := marshaler marshal: exportedObject.
+	proxy := otherMarshaler unmarshal: remoteReferenceFromObject.
+	self assertIsProxy: proxy.
+	remoteReferenceFromProxy := otherMarshaler marshal: proxy.
+	unmarshalledObject := marshaler unmarshal: remoteReferenceFromProxy.
+	self assert: unmarshalledObject identicalTo: exportedObject
 ]
 
 { #category : 'running' }
