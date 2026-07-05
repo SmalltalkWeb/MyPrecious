@@ -18,6 +18,11 @@ MpIpAddress class >> ip: ip port: port [
 		yourself
 ]
 
+{ #category : 'instance creation' }
+MpIpAddress class >> port: port [
+	^self ip: NeIpV4Address local port: port
+]
+
 { #category : 'accessing' }
 MpIpAddress >> ip [
 	^ ip
