@@ -7,9 +7,7 @@ Class {
 }
 
 { #category : 'running' }
-MpInMemoryMessagingTest >> initMiddleware [
+MpInMemoryMessagingTest >> middlewareClass [
 
-	senderMiddleware := MpInMemoryMiddleware new.
-	receiverMiddleware := MpInMemoryMiddleware new.
-
+	^ MpInMemoryMiddleware
 ]

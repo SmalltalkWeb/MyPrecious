@@ -20,7 +20,14 @@ MpRemoteMessagingTest class >> isAbstract [
 ]
 
 { #category : 'running' }
-MpRemoteMessagingTest >> initMiddleware [ 
+MpRemoteMessagingTest >> initMiddleware [
+
+	senderMiddleware := self middlewareClass new.
+	receiverMiddleware := self middlewareClass new
+]
+
+{ #category : 'running' }
+MpRemoteMessagingTest >> middlewareClass [
 	self subclassResponsibility 
 ]
 

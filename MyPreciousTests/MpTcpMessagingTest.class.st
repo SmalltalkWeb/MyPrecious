@@ -9,10 +9,15 @@ Class {
 { #category : 'running' }
 MpTcpMessagingTest >> initMiddleware [
 
-	senderMiddleware := MpTcpMiddleware new.
+	super initMiddleware.
 	senderMiddleware start.
-	receiverMiddleware := MpTcpMiddleware new.
-	receiverMiddleware start.
+	receiverMiddleware start
+]
+
+{ #category : 'running' }
+MpTcpMessagingTest >> middlewareClass [
+
+	^ MpTcpMiddleware
 ]
 
 { #category : 'running' }

@@ -37,6 +37,24 @@ MpTcpMiddleware >> newAddress [
 	^MpTcpAddress ip: localIp port: freePort
 ]
 
+{ #category : 'accessing' }
+MpTcpMiddleware >> port [
+	^self address port
+]
+
+{ #category : 'accessing' }
+MpTcpMiddleware >> port: newPort [
+
+	self address port: newPort.
+	self server port: newPort 
+]
+
+{ #category : 'accessing' }
+MpTcpMiddleware >> server [
+
+	^ server
+]
+
 { #category : 'lifecycle' }
 MpTcpMiddleware >> start [
 	server start

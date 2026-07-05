@@ -26,6 +26,6 @@ MpTcpDemo class >> startMiddleware: port [
 
 	middleware ifNotNil: [ middleware stop ].
 	middleware := MpTcpMiddleware new.
-	middleware address port: port.
+	middleware port: port.
 	middleware start
 ]
