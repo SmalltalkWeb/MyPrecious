@@ -55,6 +55,18 @@ MpRemoteMessagingTest >> testExceptionResponseMessage [
 ]
 
 { #category : 'running' }
+MpRemoteMessagingTest >> testLoad200 [
+
+	| currentCount |
+	currentCount := 0.
+	target selector: #next actionBlock: [ currentCount := currentCount + 1 ].
+	target selector: #signal actionBlock: [ self notYetImplemented ].
+	1 to: 200 do: [ :expectedCount | 
+		self assert: proxy next equals: expectedCount.
+		self should: [ proxy signal ] raise: NotYetImplemented ]
+]
+
+{ #category : 'running' }
 MpRemoteMessagingTest >> testLocalObjectRoundTripArgThenResponse [
 
 	| sentObject savedObject retrievedObject |
