@@ -21,10 +21,11 @@ MpTcpDemo class >> senderPort [
 	^ 55555
 ]
 
-{ #category : '1-initializing' }
+{ #category : '1-start' }
 MpTcpDemo class >> startMiddleware: port [
+
 	middleware ifNotNil: [ middleware stop ].
 	middleware := MpTcpMiddleware new.
-	middleware port: port.
+	middleware address port: port.
 	middleware start
 ]
