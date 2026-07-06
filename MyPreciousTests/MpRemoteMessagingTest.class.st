@@ -62,6 +62,15 @@ MpRemoteMessagingTest >> testExceptionResponseMessage [
 ]
 
 { #category : 'running' }
+MpRemoteMessagingTest >> testInvalidRemoteObjectID [
+
+	| otherID otherProxy | self fail: #todo.
+	otherID := #someRandomID.
+	otherProxy := senderMiddleware proxyAtId: otherID address: receiverMiddleware address.
+	self should: [ otherProxy anyRemoteMessage ] raise: MpInvalidObjectIdException
+]
+
+{ #category : 'running' }
 MpRemoteMessagingTest >> testLoad200 [
 
 	| currentCount |
