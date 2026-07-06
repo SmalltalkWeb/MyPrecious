@@ -1,17 +1,17 @@
 Class {
-	#name : 'MpInMemoryGateway',
-	#superclass : 'MpGateway',
+	#name : 'MpInMemorySender',
+	#superclass : 'MpSender',
 	#category : 'MyPrecious-Kernel',
 	#package : 'MyPrecious',
 	#tag : 'Kernel'
 }
 
 { #category : 'message handling' }
-MpInMemoryGateway >> dispatch: aMessage targetId: id [
+MpInMemorySender >> dispatch: aMessage targetId: id [
 	^self targetDispatcher dispatch: aMessage targetId: id
 ]
 
 { #category : 'accessing' }
-MpInMemoryGateway >> targetDispatcher [ 
+MpInMemorySender >> targetDispatcher [ 
 	^self address targetDispatcher 
 ]

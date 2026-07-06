@@ -7,7 +7,7 @@ Class {
 	#superclass : 'MpDispatcher',
 	#instVars : [
 		'idToProxyDict',
-		'gateway'
+		'sender'
 	],
 	#category : 'MyPrecious-Kernel',
 	#package : 'MyPrecious',
@@ -24,12 +24,12 @@ MpRemoteDispatcher class >> address: aMpAddress marshaler: aMarshaler [
 
 { #category : 'accessing' }
 MpRemoteDispatcher >> address [
-	^self gateway address
+	^self sender address
 ]
 
 { #category : 'accessing' }
 MpRemoteDispatcher >> address: anMpAddress [
-	self gateway: anMpAddress asGateway 
+	self sender: anMpAddress asSender 
 ]
 
 { #category : 'message handling' }
@@ -37,20 +37,8 @@ MpRemoteDispatcher >> dispatch: rawMessage targetId: id [
 
 	| rawResponse marshaledMessage |
 	marshaledMessage := self marshal: rawMessage.
-	rawResponse := self gateway dispatch: marshaledMessage targetId: id.
+	rawResponse := self sender dispatch: marshaledMessage targetId: id.
 	^ self unmarshal: rawResponse
-]
-
-{ #category : 'accessing' }
-MpRemoteDispatcher >> gateway [
-
-	^ gateway
-]
-
-{ #category : 'accessing' }
-MpRemoteDispatcher >> gateway: anObject [
-
-	gateway := anObject
 ]
 
 { #category : 'initialization' }
@@ -73,4 +61,16 @@ MpRemoteDispatcher >> newProxyAt: id [
 { #category : 'proxies' }
 MpRemoteDispatcher >> proxyAt: id [  
 	^idToProxyDict at: id ifAbsentPut: [ self newProxyAt: id ]
+]
+
+{ #category : 'accessing' }
+MpRemoteDispatcher >> sender [
+
+	^ sender
+]
+
+{ #category : 'accessing' }
+MpRemoteDispatcher >> sender: anObject [
+
+	sender := anObject
 ]

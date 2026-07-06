@@ -36,13 +36,6 @@ MpMiddlewareStructureTest >> testForgeProxy [
 
 ]
 
-{ #category : 'misc testing' }
-MpMiddlewareStructureTest >> testGatewayCreation [
-	| senderGateway |
-	senderGateway := senderMiddleware address asGateway.
-	self assert: senderGateway targetDispatcher identicalTo: senderMiddleware localDispatcher 
-]
-
 { #category : 'proxy testing' }
 MpMiddlewareStructureTest >> testSameProxyForSameIdEqualAdresses [
 
@@ -57,6 +50,13 @@ MpMiddlewareStructureTest >> testSameProxyForSameIdEqualAdresses [
 	self
 		assert: proxy1
 		identicalTo: proxy2
+]
+
+{ #category : 'misc testing' }
+MpMiddlewareStructureTest >> testSenderCreation [
+	| sender |
+	sender := senderMiddleware address asSender.
+	self assert: sender targetDispatcher identicalTo: senderMiddleware localDispatcher 
 ]
 
 { #category : 'proxy testing' }

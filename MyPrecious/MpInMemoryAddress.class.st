@@ -17,8 +17,8 @@ MpInMemoryAddress class >> targetDispatcher: aMpLocalDispatcher [
 ]
 
 { #category : 'accessing' }
-MpInMemoryAddress >> gatewayClass [
-	^MpInMemoryGateway 
+MpInMemoryAddress >> senderClass [
+	^MpInMemorySender 
 ]
 
 { #category : 'accessing' }

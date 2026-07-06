@@ -9,11 +9,11 @@ Class {
 }
 
 { #category : 'converting' }
-MpAddress >> asGateway [
-	^self gatewayClass address: self
+MpAddress >> asSender [
+	^self senderClass address: self
 ]
 
 { #category : 'converting' }
-MpAddress >> gatewayClass [
+MpAddress >> senderClass [
 	self subclassResponsibility 
 ]

@@ -7,7 +7,7 @@ Class {
 }
 
 { #category : 'converting' }
-MpTcpAddress >> gatewayClass [
+MpTcpAddress >> senderClass [
 
-	^MpTcpGateway 
+	^MpTcpSender 
 ]

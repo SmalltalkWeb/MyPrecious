@@ -2,7 +2,7 @@
 Handles outgoing messages to specific host
 "
 Class {
-	#name : 'MpGateway',
+	#name : 'MpSender',
 	#superclass : 'Object',
 	#instVars : [
 		'address'
@@ -13,25 +13,25 @@ Class {
 }
 
 { #category : 'instance creation' }
-MpGateway class >> address: anAddress [
+MpSender class >> address: anAddress [
 	^self new
 		address: anAddress;
 		yourself
 ]
 
 { #category : 'accessing' }
-MpGateway >> address [
+MpSender >> address [
 
 	^ address
 ]
 
 { #category : 'accessing' }
-MpGateway >> address: anObject [
+MpSender >> address: anObject [
 
 	address := anObject
 ]
 
 { #category : 'message handling' }
-MpGateway >> dispatch: aMessage targetId: id [
+MpSender >> dispatch: aMessage targetId: id [
 	self subclassResponsibility 
 ]
