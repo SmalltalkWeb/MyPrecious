@@ -9,58 +9,31 @@ Class {
 	#tag : 'Kernel'
 }
 
-{ #category : 'initialization' }
-MpTcpMiddleware >> dispatchMessageFromStream: stream [
-
-	| remoteMessage message id answer |
-	remoteMessage := MpSerializer materializeFromStream: stream.
-	message := remoteMessage first.
-	id := remoteMessage last.
-	answer := localDispatcher dispatch: message targetId: id.
-	MpSerializer serialize: answer toStream: stream.
-	stream flush
-]
-
-{ #category : 'initialization' }
-MpTcpMiddleware >> initialize [ 
-	super initialize.
-	server := NeTcpServer port: self address port.
-	server withCommunicationStreamDo: [ : stream | self dispatchMessageFromStream: stream ]
-]
-
-{ #category : 'initialization' }
-MpTcpMiddleware >> newAddress [
-
-	| freePort localIp |
-	freePort := NeTcpUsedPortsTracker freePortAtRandom.
-	localIp := NeIpV4Address local.
-	^MpTcpAddress ip: localIp port: freePort
-]
-
 { #category : 'accessing' }
 MpTcpMiddleware >> port [
-	^self address port
+
+	^ self receiver port
 ]
 
 { #category : 'accessing' }
 MpTcpMiddleware >> port: newPort [
 
-	self address port: newPort.
-	self server port: newPort 
+	self receiver port: newPort
 ]
 
-{ #category : 'accessing' }
-MpTcpMiddleware >> server [
+{ #category : 'initialization' }
+MpTcpMiddleware >> receiverClass [
 
-	^ server
+	^MpTcpReceiver 
 ]
 
 { #category : 'lifecycle' }
 MpTcpMiddleware >> start [
-	server start
+	self receiver start
 ]
 
 { #category : 'lifecycle' }
 MpTcpMiddleware >> stop [
-	server stop
+
+	self receiver stop
 ]

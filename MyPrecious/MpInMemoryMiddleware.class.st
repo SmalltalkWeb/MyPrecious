@@ -7,7 +7,6 @@ Class {
 }
 
 { #category : 'initialization' }
-MpInMemoryMiddleware >> newAddress [
-
-	^MpInMemoryAddress targetDispatcher: self localDispatcher 
+MpInMemoryMiddleware >> receiverClass [
+	^MpInMemoryReceiver 
 ]

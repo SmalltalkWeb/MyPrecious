@@ -7,12 +7,16 @@ Class {
 }
 
 { #category : 'message handling' }
-MpTcpSender >> dispatch: aMessage targetId: id [
+MpTcpSender >> basicSend: aMessage targetId: id [
 
-	| stream answer | 
+	| stream answer |
 	stream := ZdcSocketStream openConnectionToHost: self address ip port: self address port.
-	MpSerializer serialize: {aMessage. id} toStream: stream.
+	self serializer
+		serialize: {
+				aMessage.
+				id }
+		toStream: stream.
 	stream flush.
-	answer := MpSerializer materializeFromStream: stream.
-	^answer
+	answer := self serializer materializeFromStream: stream.
+	^ answer
 ]

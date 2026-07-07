@@ -1,6 +1,6 @@
 Class {
 	#name : 'MpUnconnectedTransporter',
-	#superclass : 'MpTransporter',
+	#superclass : 'MpTransporterOLD',
 	#traits : 'MpTPostMan',
 	#classTraits : 'MpTPostMan classTrait',
 	#instVars : [

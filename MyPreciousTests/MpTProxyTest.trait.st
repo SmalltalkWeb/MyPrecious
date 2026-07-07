@@ -21,15 +21,8 @@ MpTProxyTest >> assertIsProxy: anObject [
 { #category : 'asserting' }
 MpTProxyTest >> assertProxy: aProxy hasAddress: expectedAddress [
 	| actualDispatcher |
-	actualDispatcher := self dispatcherSlotValueInProxy: aProxy.
+	actualDispatcher := self senderSlotValueInProxy: aProxy.
 	self assert: actualDispatcher address equals: expectedAddress 
-]
-
-{ #category : 'asserting' }
-MpTProxyTest >> assertProxy: aProxy hasDispatcher: expectedDispatcher [
-	| actualDispatcher |
-	actualDispatcher := self dispatcherSlotValueInProxy: aProxy.
-	self assert: actualDispatcher identicalTo: expectedDispatcher 
 ]
 
 { #category : 'asserting' }
@@ -37,6 +30,14 @@ MpTProxyTest >> assertProxy: aProxy hasId: expectedID [
 	| actualID |
 	actualID := self idSlotValueInProxy: aProxy.
 	self assert: actualID identicalTo: expectedID 
+]
+
+{ #category : 'asserting' }
+MpTProxyTest >> assertProxy: aProxy hasSender: expectedSender [
+
+	| actualSender |
+	actualSender := self senderSlotValueInProxy: aProxy.
+	self assert: actualSender identicalTo: expectedSender
 ]
 
 { #category : 'asserting' }
@@ -61,13 +62,13 @@ MpTProxyTest >> denyIsProxy: anObject [
 ]
 
 { #category : 'accessing proxy IVs' }
-MpTProxyTest >> dispatcherSlotValueInProxy: aProxy [
-
-	^ (MpProxy slotNamed: #dispatcher) read: aProxy
-]
-
-{ #category : 'accessing proxy IVs' }
 MpTProxyTest >> idSlotValueInProxy: aProxy [
 
 	^ (MpProxy slotNamed: #id) read: aProxy
+]
+
+{ #category : 'accessing proxy IVs' }
+MpTProxyTest >> senderSlotValueInProxy: aProxy [
+
+	^ (MpProxy slotNamed: #sender) read: aProxy
 ]

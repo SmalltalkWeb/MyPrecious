@@ -9,8 +9,8 @@ Class {
 }
 
 { #category : 'converting' }
-MpAddress >> asSender [
-	^self senderClass address: self
+MpAddress >> asSenderMarshaler: aMarshaler [
+	^self senderClass address: self marshaler: aMarshaler 
 ]
 
 { #category : 'converting' }

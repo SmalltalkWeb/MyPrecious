@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'exporter',
 		'address',
-		'addressToDispatcherDict'
+		'addressToSenderDict'
 	],
 	#category : 'MyPrecious-Kernel',
 	#package : 'MyPrecious',
@@ -23,15 +23,6 @@ MpMarshaler >> address: anObject [
 	address := anObject
 ]
 
-{ #category : 'creating proxies' }
-MpMarshaler >> dispatcherFromAddress: anMpAddress [
-
-	^addressToDispatcherDict 
-		at: anMpAddress 
-		ifAbsentPut: [self newDispatcherFromAddress: anMpAddress ].
-	
-]
-
 { #category : 'accessing' }
 MpMarshaler >> exporter [
 
@@ -48,7 +39,7 @@ MpMarshaler >> initialize [
 
 	super initialize.
 	exporter := MpExporter new.
-	addressToDispatcherDict := Dictionary new
+	addressToSenderDict := Dictionary new
 ]
 
 { #category : 'marshalling top level' }
@@ -79,9 +70,9 @@ MpMarshaler >> marshalProxyId: id dispatcher: dispatcher [
 ]
 
 { #category : 'creating proxies' }
-MpMarshaler >> newDispatcherFromAddress: anMpAddress [
+MpMarshaler >> newSenderFromAddress: anMpAddress [
 
-	^ MpRemoteDispatcher address: anMpAddress marshaler: self
+	^ anMpAddress asSenderMarshaler: self
 ]
 
 { #category : 'marshalling low level' }
@@ -91,9 +82,9 @@ MpMarshaler >> objectAt: id [
 
 { #category : 'creating proxies' }
 MpMarshaler >> proxyAtId: id address: anMpAddress [ 
-	| dispatcher |
-	dispatcher := self dispatcherFromAddress: anMpAddress.
-	^dispatcher proxyAt: id
+	| sender |
+	sender := self senderFromAddress: anMpAddress.
+	^sender proxyAt: id
 
 ]
 
@@ -101,6 +92,15 @@ MpMarshaler >> proxyAtId: id address: anMpAddress [
 MpMarshaler >> proxyFactory [
 
 	^ self
+]
+
+{ #category : 'creating proxies' }
+MpMarshaler >> senderFromAddress: anMpAddress [
+
+	^addressToSenderDict 
+		at: anMpAddress 
+		ifAbsentPut: [self newSenderFromAddress: anMpAddress ].
+	
 ]
 
 { #category : 'marshalling top level' }

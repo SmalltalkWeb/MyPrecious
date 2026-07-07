@@ -10,25 +10,25 @@ Class {
 }
 
 { #category : 'instance creation' }
-MpInMemoryAddress class >> targetDispatcher: aMpLocalDispatcher [ 
+MpInMemoryAddress class >> receiver: aMpLocalDispatcher [ 
 	^self new
-		targetDispatcher: aMpLocalDispatcher;
+		receiver: aMpLocalDispatcher;
 		yourself
 ]
 
 { #category : 'accessing' }
-MpInMemoryAddress >> senderClass [
-	^MpInMemorySender 
-]
-
-{ #category : 'accessing' }
-MpInMemoryAddress >> targetDispatcher [
+MpInMemoryAddress >> receiver [
 
 	^ targetDispatcher
 ]
 
 { #category : 'accessing' }
-MpInMemoryAddress >> targetDispatcher: anObject [
+MpInMemoryAddress >> receiver: anObject [
 
 	targetDispatcher := anObject
+]
+
+{ #category : 'accessing' }
+MpInMemoryAddress >> senderClass [
+	^MpInMemorySender 
 ]

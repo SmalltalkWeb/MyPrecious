@@ -1,6 +1,6 @@
 Class {
 	#name : 'MpConnectedTransporter',
-	#superclass : 'MpTransporter',
+	#superclass : 'MpTransporterOLD',
 	#instVars : [
 		'connectionsDict',
 		'connectionService',

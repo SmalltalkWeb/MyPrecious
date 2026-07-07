@@ -7,11 +7,12 @@ Class {
 }
 
 { #category : 'message handling' }
-MpInMemorySender >> dispatch: aMessage targetId: id [
-	^self targetDispatcher dispatch: aMessage targetId: id
+MpInMemorySender >> basicSend: aMessage targetId: id [
+
+	^ self receiver receive: aMessage targetId: id
 ]
 
 { #category : 'accessing' }
-MpInMemorySender >> targetDispatcher [ 
-	^self address targetDispatcher 
+MpInMemorySender >> receiver [ 
+	^self address receiver 
 ]

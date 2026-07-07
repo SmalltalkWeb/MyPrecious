@@ -14,7 +14,7 @@ MpLocalMiddlewareOLD2 >> export: anObjectToExport id: anId [
 ]
 
 { #category : 'accessing' }
-MpLocalMiddlewareOLD2 >> localDispatcher [
+MpLocalMiddlewareOLD2 >> receiver [
 
 	^ localDispatcher
 ]

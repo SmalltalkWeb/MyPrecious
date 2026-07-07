@@ -33,7 +33,7 @@ MpProxyFactoryOLD2 >> newProxyFrom: aReference [
 	| dispatcher id |
 	id := aReference id.
 	dispatcher := dispatcherFactory dispatcherAt: aReference address.
-	^MpProxy id: id dispatcher: dispatcher
+	^MpProxy id: id sender: dispatcher
 ]
 
 { #category : 'building' }

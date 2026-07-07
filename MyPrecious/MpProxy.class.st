@@ -5,8 +5,8 @@ Class {
 	#name : 'MpProxy',
 	#superclass : 'ProtoObject',
 	#instVars : [
-		'dispatcher',
-		'id'
+		'id',
+		'sender'
 	],
 	#category : 'MyPrecious-Kernel',
 	#package : 'MyPrecious',
@@ -14,9 +14,9 @@ Class {
 }
 
 { #category : 'instance creation' }
-MpProxy class >> id: anId dispatcher: aDispatcher [
+MpProxy class >> id: anId sender: aDispatcher [
 	^self new
-		id: anId dispatcher: aDispatcher;
+		id: anId sender: aDispatcher;
 		yourself
 ]
 
@@ -29,21 +29,22 @@ MpProxy >> class [
 
 { #category : 'reflective operations' }
 MpProxy >> doesNotUnderstand: aMessage [
-
+	"Value the response to get the actual value or signal an exception.
+	See the MpResponse hierarchy"
 	| remoteResponse |
-	remoteResponse := dispatcher dispatch: aMessage targetId: id.
+	remoteResponse := sender send: aMessage targetId: id.
 	^ remoteResponse value
 ]
 
 { #category : 'initialization' }
-MpProxy >> id: anId dispatcher: aDispatcher [
+MpProxy >> id: anId sender: aSender [
 	id := anId.
-	dispatcher := aDispatcher
+	sender := aSender
 ]
 
 { #category : 'marshaling' }
 MpProxy >> marshalWith: marshaler [
-	^marshaler marshalProxyId: id dispatcher: dispatcher 
+	^marshaler marshalProxyId: id dispatcher: sender 
 ]
 
 { #category : 'accessing' }

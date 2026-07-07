@@ -54,9 +54,10 @@ MpMiddlewareStructureTest >> testSameProxyForSameIdEqualAdresses [
 
 { #category : 'misc testing' }
 MpMiddlewareStructureTest >> testSenderCreation [
+
 	| sender |
-	sender := senderMiddleware address asSender.
-	self assert: sender targetDispatcher identicalTo: senderMiddleware localDispatcher 
+	sender := senderMiddleware address asSenderMarshaler: self.
+	self assert: sender receiver identicalTo: senderMiddleware receiver
 ]
 
 { #category : 'proxy testing' }
@@ -68,8 +69,8 @@ MpMiddlewareStructureTest >> testTwoProxiesDifferentIdSameAdressHaveIdenticalDis
 	proxy2 := senderMiddleware
 		          proxyAtId: #o2
 		          address: receiverMiddleware address.
-	dispacher1 := self dispatcherSlotValueInProxy: proxy1.
-	dispacher2 := self dispatcherSlotValueInProxy: proxy2.
+	dispacher1 := self senderSlotValueInProxy: proxy1.
+	dispacher2 := self senderSlotValueInProxy: proxy2.
 	self
 		assert: dispacher1
 		identicalTo: dispacher2
@@ -84,8 +85,8 @@ MpMiddlewareStructureTest >> testTwoProxiesSameIdDiffrentAdressesHaveDifferentDi
 	proxy2 := senderMiddleware
 		          proxyAtId: #o2
 		          address: MpInMemoryAddress new.
-	dispacher1 := self dispatcherSlotValueInProxy: proxy1.
-	dispacher2 := self dispatcherSlotValueInProxy: proxy2.
+	dispacher1 := self senderSlotValueInProxy: proxy1.
+	dispacher2 := self senderSlotValueInProxy: proxy2.
 	self
 		deny: dispacher1
 		equals: dispacher2

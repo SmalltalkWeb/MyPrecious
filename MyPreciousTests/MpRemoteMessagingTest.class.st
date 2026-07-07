@@ -99,7 +99,7 @@ MpRemoteMessagingTest >> testLocalObjectRoundTripArgThenResponse [
 
 { #category : 'running' }
 MpRemoteMessagingTest >> testMessagesUnderstoodByProxy [
-	proxy id: nil dispatcher: nil.
+	proxy id: nil sender: nil.
 	self assert: proxy == proxy. "Testing for #== message"
 	self assert: proxy yourself identicalTo: proxy.
 	self deny: proxy isNil.

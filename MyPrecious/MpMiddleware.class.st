@@ -2,7 +2,7 @@ Class {
 	#name : 'MpMiddleware',
 	#superclass : 'Object',
 	#instVars : [
-		'localDispatcher'
+		'receiver'
 	],
 	#category : 'MyPrecious-Kernel',
 	#package : 'MyPrecious',
@@ -11,7 +11,7 @@ Class {
 
 { #category : 'accessing' }
 MpMiddleware >> address [
-	^localDispatcher address
+	^receiver address
 ]
 
 { #category : 'exporting' }
@@ -21,27 +21,15 @@ MpMiddleware >> export: anObject id: anId [
 
 { #category : 'accessing' }
 MpMiddleware >> exporter [
-	^self localDispatcher exporter
+	^self receiver exporter
 ]
 
 { #category : 'initialization' }
-MpMiddleware >> initialize [ 
+MpMiddleware >> initialize [
+
 	super initialize.
-	localDispatcher := MpLocalDispatcher new.
-	"First create local dispatcher before creating address, 
-	because address can require the local dispatcher"
-	localDispatcher address: self newAddress
-	
-]
+	receiver := self receiverClass new.
 
-{ #category : 'accessing' }
-MpMiddleware >> localDispatcher [
-	^localDispatcher
-]
-
-{ #category : 'initialization' }
-MpMiddleware >> newAddress [
-	self subclassResponsibility 
 ]
 
 { #category : 'importing' }
@@ -51,5 +39,15 @@ MpMiddleware >> proxyAtId: id address: anMpAddress [
 
 { #category : 'accessing' }
 MpMiddleware >> proxyFactory [
-	^self localDispatcher proxyFactory
+	^self receiver proxyFactory
+]
+
+{ #category : 'accessing' }
+MpMiddleware >> receiver [
+	^receiver
+]
+
+{ #category : 'initialization' }
+MpMiddleware >> receiverClass [
+	^self subclassResponsibility 
 ]

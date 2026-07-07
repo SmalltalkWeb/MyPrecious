@@ -77,7 +77,7 @@ MpUnmarshalingTest >> testUnmarshalMessage1ArgRemoteReferenceToProxy [
 
 	| unmarshaledMessage selector proxy originalMessage marshaledMessage remoteReference |
 	selector := #bar:.
-	originalMessage := Message selector: selector argument: Object new.
+	originalMessage := Message selector: selector argument: Object new. 
 	marshaledMessage := marshaler marshal: originalMessage.
 	remoteReference := marshaledMessage argument.
 	unmarshaledMessage := otherMarshaler unmarshal: marshaledMessage.
@@ -171,7 +171,7 @@ MpUnmarshalingTest >> testUnmarshalRemoteReferenceToProxy [
 	proxy := otherMarshaler unmarshal: remoteReference.
 	self assertIsProxy: proxy.
 	self assertProxy: proxy hasId: remoteReference id.
-	dispatcher := self dispatcherSlotValueInProxy: proxy.
+	dispatcher := self senderSlotValueInProxy: proxy.
 	self assert: dispatcher address equals: remoteReference address.
 	self denyIsProxy: dispatcher marshaler.
 	self assert: dispatcher marshaler identicalTo: otherMarshaler.
