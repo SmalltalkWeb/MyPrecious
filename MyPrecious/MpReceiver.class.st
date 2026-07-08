@@ -65,11 +65,12 @@ MpReceiver >> proxyFactory [
 MpReceiver >> receive: aMarshaledMessage targetId: id [
 
 	| rawResponse receiver unmarshaledMessage |
-	receiver := self objectAt: id.
-	unmarshaledMessage := self unmarshal: aMarshaledMessage.
 	^ [
+		  receiver := self objectAt: id.
+		  unmarshaledMessage := self unmarshal: aMarshaledMessage.
 		  rawResponse := unmarshaledMessage sendTo: receiver.
-		  self marshalResponseClass: MpNormalResponse value: rawResponse ]
-		  on: Exception
-		  do: [ :ex | self marshalResponseClass: MpExceptionResponse value: ex ]
+		  self marshalResponseClass: MpNormalResponse value: rawResponse 
+	]
+		on: Exception
+		do: [ :ex | self marshalResponseClass: MpExceptionResponse value: ex ]
 ]
