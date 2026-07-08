@@ -17,6 +17,18 @@ MpTcpReceiver >> initialize [
 	server withCommunicationStreamDo: [ :stream | self receiveMessageFromStream: stream ]
 ]
 
+{ #category : 'lifecycle' }
+MpTcpReceiver >> isStarted [
+
+	^self server isStarted
+]
+
+{ #category : 'lifecycle' }
+MpTcpReceiver >> isStopped [
+
+	^self server isStopped
+]
+
 { #category : 'initialization' }
 MpTcpReceiver >> newAddress [
 

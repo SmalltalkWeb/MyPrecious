@@ -41,5 +41,6 @@ MpExporter >> newFreeId [
 
 { #category : 'accessing' }
 MpExporter >> objectAt: id [
-	^idToObjectDict at: id
+
+	^ idToObjectDict at: id ifAbsent: [ MpNoObjectAtIdError signal ]
 ]

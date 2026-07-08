@@ -51,3 +51,8 @@ MpMiddleware >> receiver [
 MpMiddleware >> receiverClass [
 	^self subclassResponsibility 
 ]
+
+{ #category : 'accessing' }
+MpMiddleware >> server [
+	^self receiver server
+]

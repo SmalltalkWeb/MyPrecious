@@ -1,8 +1,8 @@
 Class {
 	#name : 'MpRemoteMessagingTest',
 	#superclass : 'TestCase',
-	#traits : 'MpTProxyTest',
-	#classTraits : 'MpTProxyTest classTrait',
+	#traits : 'MpTProxyTest + CcTConcurrencyTest',
+	#classTraits : 'MpTProxyTest classTrait + CcTConcurrencyTest classTrait',
 	#instVars : [
 		'proxy',
 		'target',
@@ -57,17 +57,17 @@ MpRemoteMessagingTest >> testExceptionResponseMessage [
 	[ proxy divide: 89 by: 0 ]
 		on: ZeroDivide
 		do: [ :ex | capturedException := ex ].
-	self assertClassOf: capturedException is: MpRemoteException.
+	self assertClassOf: capturedException is: MpRemoteError.
 	self assertIsProxy: capturedException exceptionProxy
 ]
 
 { #category : 'running' }
-MpRemoteMessagingTest >> testInvalidRemoteObjectID [
+MpRemoteMessagingTest >> testIdMatchingNoObject [
 
-	| otherID otherProxy | self fail: #todo.
+	| otherID otherProxy |
 	otherID := #someRandomID.
-	otherProxy := senderMiddleware proxyAtId: otherID address: receiverMiddleware address.
-	self should: [ otherProxy anyRemoteMessage ] raise: MpInvalidObjectIdException
+	[otherProxy := senderMiddleware proxyAtId: otherID address: receiverMiddleware address] on: Exception do: [: ex | self fail].
+	self should: [ otherProxy anyRemoteMessage ] raise: MpNoObjectAtIdError
 ]
 
 { #category : 'running' }

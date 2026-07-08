@@ -26,7 +26,7 @@ MpUnmarshalingTest >> testUnmarshalExceptionResponse [
 	marshaledResponse := marshaler marshal: response.
 	unmarshalledResponse := otherMarshaler unmarshal: marshaledResponse.
 	remoteException := unmarshalledResponse basicValue.
-	self assertClassOf: remoteException is: MpRemoteException.
+	self assertClassOf: remoteException is: MpRemoteError.
 	self assertIsProxy: remoteException exceptionProxy.
 	"Remote exception and Proxy both redefine the #class method"
 	self assert: remoteException class equals: originException class.

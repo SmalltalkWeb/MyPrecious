@@ -9,6 +9,18 @@ Class {
 	#tag : 'Kernel'
 }
 
+{ #category : 'lifecycle' }
+MpTcpMiddleware >> isStarted [
+
+	^self receiver isStarted
+]
+
+{ #category : 'lifecycle' }
+MpTcpMiddleware >> isStopped [
+
+	^self receiver isStopped
+]
+
 { #category : 'accessing' }
 MpTcpMiddleware >> port [
 

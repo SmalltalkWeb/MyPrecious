@@ -29,10 +29,11 @@ MpMarshalingTest >> exporter [
 ]
 
 { #category : 'running' }
-MpMarshalingTest >> newAddress [ 
+MpMarshalingTest >> newAddress [
 	"We provide target dispatcher to ensure different addresses are NOT equal.
 	Address equality is used to retrieve local objects. See MpMarshaler >> #unmarshalRemoteReference:"
-	^MpInMemoryAddress receiver: MpReceiver new
+
+	^ MpInMemoryAddress receiver: MpInMemoryReceiver new
 ]
 
 { #category : 'running' }

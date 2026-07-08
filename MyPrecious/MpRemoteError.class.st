@@ -1,6 +1,6 @@
 Class {
-	#name : 'MpRemoteException',
-	#superclass : 'Exception',
+	#name : 'MpRemoteError',
+	#superclass : 'Error',
 	#instVars : [
 		'exceptionProxy',
 		'exceptionClass'
@@ -11,7 +11,7 @@ Class {
 }
 
 { #category : 'instance creation' }
-MpRemoteException class >> on: aProxy class: anExceptionClass messageText: aString [
+MpRemoteError class >> on: aProxy class: anExceptionClass messageText: aString [
 	^self new
 		exceptionProxy: aProxy ;
 		exceptionClass: anExceptionClass ;
@@ -20,31 +20,31 @@ MpRemoteException class >> on: aProxy class: anExceptionClass messageText: aStri
 ]
 
 { #category : 'class membership' }
-MpRemoteException >> class [
+MpRemoteError >> class [
 	exceptionClass ifNil: [ ^super class ].
 	^exceptionClass
 ]
 
 { #category : 'accessing' }
-MpRemoteException >> exceptionClass [
+MpRemoteError >> exceptionClass [
 
 	^ exceptionClass
 ]
 
 { #category : 'accessing' }
-MpRemoteException >> exceptionClass: anObject [
+MpRemoteError >> exceptionClass: anObject [
 
 	exceptionClass := anObject
 ]
 
 { #category : 'accessing' }
-MpRemoteException >> exceptionProxy [
+MpRemoteError >> exceptionProxy [
 
 	^ exceptionProxy 
 ]
 
 { #category : 'accessing' }
-MpRemoteException >> exceptionProxy: anException [
+MpRemoteError >> exceptionProxy: anException [
 
 	exceptionProxy := anException.
 	

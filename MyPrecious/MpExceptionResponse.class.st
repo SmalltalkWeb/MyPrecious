@@ -16,7 +16,7 @@ MpExceptionResponse >> unmarshalWith: aMarshaler [
 	| proxy localExceptionClass |
 	proxy := value unmarshalWith: aMarshaler.
 	localExceptionClass  := Smalltalk at: exceptionClassName asSymbol.
-	value := MpRemoteException
+	value := MpRemoteError
 		on: proxy
 		class: localExceptionClass
 		messageText: messageText 
