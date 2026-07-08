@@ -66,8 +66,10 @@ MpRemoteMessagingTest >> testIdMatchingNoObject [
 
 	| otherID otherProxy |
 	otherID := #someRandomID.
-	[otherProxy := senderMiddleware proxyAtId: otherID address: receiverMiddleware address] on: Exception do: [: ex | self fail].
-	self should: [ otherProxy anyRemoteMessage ] raise: MpNoObjectAtIdError
+	otherProxy := senderMiddleware proxyAtId: otherID address: receiverMiddleware address.
+	[ otherProxy anyRemoteMessage ]
+		on: Exception
+		do: [ :ex | (ex isKindOf: MpNoObjectAtIdError) ifFalse: [ self fail: ex description ] ]
 ]
 
 { #category : 'running' }

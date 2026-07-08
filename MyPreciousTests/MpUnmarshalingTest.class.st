@@ -165,6 +165,15 @@ MpUnmarshalingTest >> testUnmarshalRemoteReferenceToLocalObject [
 ]
 
 { #category : 'running' }
+MpUnmarshalingTest >> testUnmarshalRemoteReferenceToNonexistingObject [
+
+	| unusedID undefinedObjectRemoteReference |
+	unusedID := #foobar.
+	undefinedObjectRemoteReference := MpRemoteReference id: unusedID address: otherMarshaler address.
+	self should: [ otherMarshaler unmarshal: undefinedObjectRemoteReference ] raise: MpNoObjectAtIdError
+]
+
+{ #category : 'running' }
 MpUnmarshalingTest >> testUnmarshalRemoteReferenceToProxy [
 	| remoteReference proxy dispatcher |
 	remoteReference := marshaler marshal: Object new.
