@@ -1,9 +1,6 @@
 Class {
 	#name : 'MpTcpMiddleware',
 	#superclass : 'MpMiddleware',
-	#instVars : [
-		'server'
-	],
 	#category : 'MyPrecious-Kernel',
 	#package : 'MyPrecious',
 	#tag : 'Kernel'
