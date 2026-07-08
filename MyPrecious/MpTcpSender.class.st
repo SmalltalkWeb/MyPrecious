@@ -9,24 +9,39 @@ Class {
 { #category : 'message handling' }
 MpTcpSender >> basicSend: aMessage targetId: id [
 
-	| stream |
+	| stream remoteMessage |
 	stream := self openConnectionStream.
-	self serializer
-		serialize: {
-				aMessage.
-				id }
-		toStream: stream.
-	stream flush.
-	[^self serializer materializeFromStream: stream ]
-		on: ConnectionTimedOut
-		do: [ :ex | MpResponseTimedOutError signal ].
-
+	remoteMessage := {
+		                 aMessage.
+		                 id }.
+	self sendRemoteMessage: remoteMessage to: stream.
+	^ self receiveRemoteResponseFrom: stream
 ]
 
 { #category : 'message handling' }
 MpTcpSender >> openConnectionStream [
 
-	^ [ZdcSocketStream openConnectionToHost: self address ip port: self address port timeout: self timeoutSeconds] on: Error do: [ : err | MpConnectTimeoutError signal: err messageText ]
+	^ [ZdcSocketStream 
+			openConnectionToHost: self address ip 
+			port: self address port timeout: self timeoutSeconds] 
+		on: ConnectionTimedOut 
+		do: [ : err | 
+			MpConnectTimeoutError signal: err messageText ]
+]
+
+{ #category : 'message handling' }
+MpTcpSender >> receiveRemoteResponseFrom: stream [
+
+	^ [ self serializer materializeFromStream: stream ]
+		  on: ConnectionTimedOut
+		  do: [ :ex | MpResponseTimedOutError signal ]
+]
+
+{ #category : 'message handling' }
+MpTcpSender >> sendRemoteMessage: remoteMessage to: stream [
+
+	self serializer serialize: remoteMessage toStream: stream.
+	stream flush
 ]
 
 { #category : 'accessing' }
