@@ -9,10 +9,5 @@ Class {
 { #category : 'handling' }
 MpMiddelwareError >> defaultAction [
 
-	UIManager default inform: self messageText
-]
-
-{ #category : 'accessing' }
-MpMiddelwareError >> messageText [
-	^super messageText ifNil: [ self asString, ' occured!' ]
+	UIManager default inform: self description
 ]
